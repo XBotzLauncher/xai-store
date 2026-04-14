@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XAiHost — Panel Hosting Pterodactyl</title>
+  <meta name="description" content="Hosting panel Pterodactyl murah untuk Node.js & Minecraft. Server Singapore, NVMe 900MB/s, uptime 24/7." />
+  <meta property="og:title" content="XAiHost — Panel Hosting Pterodactyl" />
+  <meta property="og:image" content="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" />
+  <link rel="icon" type="image/svg+xml" href="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg:          #f0f2f5;
+      --surface:     #ffffff;
+      --surface2:    #f7f8fa;
+      --border:      #e4e7ec;
+      --border2:     #d0d5dd;
+      --text:        #101828;
+      --text2:       #475467;
+      --text3:       #98a2b3;
+      --blue:        #1d6ae5;
+      --blue-light:  #eff4ff;
+      --blue-mid:    #b2ccff;
+      --green:       #12b76a;
+      --green-light: #d1fadf;
+      --yellow:      #f79009;
+      --yellow-light:#fef0c7;
+      --red:         #f04438;
+      --red-light:   #fee4e2;
+      --purple:      #6941c6;
+      --purple-light:#f4f3ff;
+      --orange:      #ef6820;
+      --orange-light:#fef3ee;
+      --r:  10px;
+      --r2: 7px;
+      --sh: 0 1px 3px rgba(16,24,40,.08), 0 1px 2px rgba(16,24,40,.04);
+      --sh2:0 4px 16px rgba(16,24,40,.09);
+      --sh3:0 8px 32px rgba(16,24,40,.12);
+      --nav: 64px;
+      --ff: 'Plus Jakarta Sans', sans-serif;
+      --fm: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; user-select: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 200;
+      height: var(--nav);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 24px; gap: 12px;
+      box-shadow: var(--sh);
+    }
+    .n-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1rem; font-weight: 800; color: var(--text);
+      text-decoration: none; letter-spacing: -.025em;
+    }
+    .n-logo-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--blue) 0%, #6941c6 100%);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(29,106,229,.35);
+      overflow: hidden;
+    }
+    .n-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .n-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .n-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 7px;
+      font-size: .79rem; font-weight: 600;
+      text-decoration: none; color: var(--text2);
+      border: 1px solid var(--border); background: var(--surface);
+      transition: .15s; cursor: pointer;
+    }
+    .n-btn:hover { background: var(--bg); color: var(--text); }
+    .n-btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .n-btn.primary:hover { background: #1559c7; }
+
+    /* ── HERO ── */
+    .hero-wrap {
+      padding-top: calc(var(--nav) + 64px);
+      padding-bottom: 80px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(29,106,229,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 60%, rgba(105,65,198,.05) 0%, transparent 70%);
+    }
+    .hero-wrap > * { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--blue-light); color: var(--blue);
+      border: 1px solid var(--blue-mid);
+      font-size: .72rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 20px;
+      animation: fadeUp .5s ease both;
+    }
+    .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1.1;
+      margin-bottom: 18px;
+      animation: fadeUp .5s .1s ease both;
+    }
+    .hero-title em { font-style: normal; color: var(--blue); }
+    .hero-sub {
+      font-size: clamp(.9rem, 2vw, 1.05rem);
+      color: var(--text2); max-width: 560px; margin: 0 auto 32px;
+      animation: fadeUp .5s .18s ease both;
+    }
+    .hero-chips {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-bottom: 40px;
+      animation: fadeUp .5s .26s ease both;
+    }
+    .chip {
+      display: flex; align-items: center; gap: 5px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 5px 13px;
+      font-size: .73rem; font-weight: 600; color: var(--text2);
+      box-shadow: var(--sh);
+    }
+    .chip i { font-size: .66rem; color: var(--blue); }
+    .chip.green i { color: var(--green); }
+    .chip.purple i { color: var(--purple); }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── SPEC STRIP ── */
+    .spec-strip {
+      background: var(--text);
+      padding: 16px 24px;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+    }
+    .spec-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .77rem; color: rgba(255,255,255,.75); font-family: var(--fm);
+    }
+    .spec-item i { color: var(--blue); font-size: .8rem; }
+    .spec-item strong { color: #fff; }
+
+    /* ── SECTION ── */
+    .section { padding: 72px 24px; max-width: 1200px; margin: 0 auto; }
+    .section-head { text-align: center; margin-bottom: 48px; }
+    .section-head h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; letter-spacing: -.035em;
+      margin-bottom: 10px;
+    }
+    .section-head h2 em { font-style: normal; color: var(--blue); }
+    .section-head p { color: var(--text2); font-size: .92rem; max-width: 480px; margin: 0 auto; }
+    .tab-switcher {
+      display: flex; justify-content: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 4px;
+      gap: 4px; width: fit-content; margin: 0 auto 40px;
+      box-shadow: var(--sh);
+    }
+    .tab-btn {
+      padding: 9px 24px; border-radius: 7px; font-size: .83rem; font-weight: 700;
+      border: none; background: none; cursor: pointer; color: var(--text2);
+      transition: .18s; display: flex; align-items: center; gap: 7px;
+    }
+    .tab-btn.active { background: var(--blue); color: #fff; box-shadow: 0 2px 8px rgba(29,106,229,.3); }
+
+    /* ── PRICING GRID ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .plan-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      box-shadow: var(--sh);
+      transition: .2s;
+      position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .plan-card:hover { box-shadow: var(--sh3); transform: translateY(-3px); border-color: var(--blue-mid); }
+    .plan-card.popular { border-color: var(--blue); border-width: 2px; }
+    .plan-card.popular::before {
+      content: '⭐ Populer';
+      position: absolute; top: 0; right: 0;
+      background: var(--blue); color: #fff;
+      font-size: .62rem; font-weight: 800;
+      padding: 4px 12px; border-radius: 0 12px 0 10px;
+      letter-spacing: .04em;
+    }
+    .plan-icon {
+      width: 44px; height: 44px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-bottom: 16px;
+    }
+    .pi-node { background: var(--blue-light); color: var(--blue); }
+    .pi-mc   { background: var(--green-light); color: var(--green); }
+    .plan-name { font-size: .78rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 4px; }
+    .plan-price {
+      font-size: 2rem; font-weight: 800; letter-spacing: -.04em;
+      color: var(--text); margin-bottom: 2px;
+    }
+    .plan-price span { font-size: .85rem; font-weight: 500; color: var(--text3); }
+    .plan-desc { font-size: .79rem; color: var(--text3); margin-bottom: 18px; }
+    .plan-specs { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+    .plan-specs li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .82rem; color: var(--text2);
+    }
+    .plan-specs li i { color: var(--green); font-size: .75rem; width: 14px; flex-shrink: 0; }
+    .plan-specs li strong { color: var(--text); font-weight: 700; }
+    .plan-btn {
+      width: 100%; padding: 10px; border-radius: 8px;
+      font-size: .83rem; font-weight: 700;
+      border: 1.5px solid var(--border); background: var(--bg);
+      color: var(--text); cursor: pointer; transition: .15s;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    .plan-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .plan-card.popular .plan-btn { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .plan-card.popular .plan-btn:hover { background: #1559c7; }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .feat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 22px;
+      box-shadow: var(--sh); transition: .18s;
+    }
+    .feat-card:hover { box-shadow: var(--sh2); transform: translateY(-2px); }
+    .feat-icon {
+      width: 40px; height: 40px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: 12px;
+    }
+    .feat-card h3 { font-size: .88rem; font-weight: 700; margin-bottom: 4px; }
+    .feat-card p  { font-size: .78rem; color: var(--text2); line-height: 1.55; }
+
+    /* ── MODAL ── */
+    .modal-bg {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(16,24,40,.5); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-bg.show { display: flex; }
+    .modal {
+      background: var(--surface); border-radius: 16px;
+      width: 100%; max-width: 480px;
+      box-shadow: 0 24px 64px rgba(16,24,40,.2);
+      animation: modalIn .25s cubic-bezier(.34,1.56,.64,1) both;
+      max-height: 90vh; overflow-y: auto;
+    }
+    @keyframes modalIn { from { opacity:0; transform:scale(.93) translateY(16px); } to { opacity:1; transform:none; } }
+    .modal-head {
+      padding: 24px 24px 0;
+      display: flex; align-items: flex-start; justify-content: space-between;
+    }
+    .modal-head h3 { font-size: 1.1rem; font-weight: 800; letter-spacing: -.02em; }
+    .modal-head p  { font-size: .82rem; color: var(--text2); margin-top: 3px; }
+    .modal-close {
+      width: 30px; height: 30px; border-radius: 7px;
+      background: var(--bg); border: 1px solid var(--border);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text2); flex-shrink: 0; font-size: .8rem;
+      transition: .14s;
+    }
+    .modal-close:hover { background: var(--red-light); color: var(--red); border-color: #fda29b; }
+    .modal-summary {
+      margin: 16px 24px;
+      background: var(--blue-light); border: 1px solid var(--blue-mid);
+      border-radius: 9px; padding: 14px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-summary-left { font-size: .8rem; }
+    .modal-summary-left strong { display: block; font-size: .92rem; font-weight: 800; color: var(--text); }
+    .modal-summary-left span { color: var(--text2); }
+    .modal-summary-price { font-size: 1.4rem; font-weight: 800; color: var(--blue); }
+    .modal-body { padding: 0 24px 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: .78rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 10px 13px;
+      border: 1.5px solid var(--border); border-radius: 7px;
+      font-family: var(--ff); font-size: .85rem; color: var(--text);
+      background: var(--surface); outline: none; transition: .14s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,106,229,.1); }
+    .form-group input::placeholder { color: var(--text3); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group select { cursor: pointer; }
+    .mc-options { display: none; }
+    .mc-options.show { display: block; }
+
+    /* Egg selector */
+    .egg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+    .egg-opt {
+      border: 1.5px solid var(--border); border-radius: 7px;
+      padding: 8px 6px; text-align: center; cursor: pointer;
+      font-size: .73rem; font-weight: 600; color: var(--text2);
+      transition: .14s; background: var(--surface2);
+    }
+    .egg-opt:hover { border-color: var(--blue-mid); color: var(--blue); background: var(--blue-light); }
+    .egg-opt.selected { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+    .egg-opt i { display: block; font-size: 1.1rem; margin-bottom: 4px; }
+
+    .submit-btn {
+      width: 100%; padding: 12px; border-radius: 9px;
+      background: var(--blue); color: #fff;
+      font-size: .9rem; font-weight: 700;
+      border: none; cursor: pointer; transition: .15s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 8px;
+    }
+    .submit-btn:hover:not(:disabled) { background: #1559c7; }
+    .submit-btn:disabled { opacity: .6; cursor: not-allowed; }
+    .submit-btn .spin { animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── COUPON ── */
+    .coupon-wrap {
+      display: flex; gap: 8px; margin-bottom: 16px;
+    }
+    .coupon-wrap input {
+      flex: 1; padding: 10px 13px;
+      border: 1.5px solid var(--border); border-radius: 7px;
+      font-family: var(--fm); font-size: .83rem; color: var(--text);
+      background: var(--surface); outline: none; transition: .14s;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .coupon-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,106,229,.1); }
+    .coupon-wrap input::placeholder { text-transform: none; letter-spacing: normal; color: var(--text3); }
+    .coupon-btn {
+      padding: 10px 14px; border-radius: 7px;
+      background: var(--bg); border: 1.5px solid var(--border);
+      font-size: .79rem; font-weight: 700; color: var(--text2);
+      cursor: pointer; transition: .14s; white-space: nowrap;
+    }
+    .coupon-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .coupon-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .coupon-result {
+      border-radius: 7px; padding: 9px 13px;
+      font-size: .79rem; font-weight: 600;
+      margin-bottom: 16px; display: none;
+      align-items: center; gap: 8px;
+    }
+    .coupon-result.ok  { display: flex; background: var(--green-light); color: #065f46; border: 1px solid #6ee7b7; }
+    .coupon-result.err { display: flex; background: var(--red-light);   color: #991b1b; border: 1px solid #fca5a5; }
+
+    /* ── PAYMENT MODAL ── */
+    .pay-modal {
+      background: var(--surface); border-radius: 16px;
+      width: 100%; max-width: 400px;
+      box-shadow: 0 24px 64px rgba(16,24,40,.2);
+      animation: modalIn .25s cubic-bezier(.34,1.56,.64,1) both;
+      text-align: center; overflow: hidden;
+    }
+    .pay-header {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      padding: 28px 24px 20px;
+      color: #fff;
+    }
+    .pay-header h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+    .pay-header p  { font-size: .8rem; opacity: .85; }
+    .pay-amount { font-size: 2.2rem; font-weight: 800; margin: 8px 0 2px; }
+    .pay-body { padding: 24px; }
+    .qr-wrap {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px; margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qr-wrap img { max-width: 200px; border-radius: 4px; }
+    .pay-info { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .pay-info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .8rem;
+    }
+    .pay-info-row span:first-child { color: var(--text2); }
+    .pay-info-row span:last-child  { font-weight: 700; font-family: var(--fm); }
+    .pay-expired { background: var(--yellow-light); border: 1px solid #fec84b; border-radius: 7px; padding: 9px 14px; font-size: .78rem; color: #7a2e0e; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .pay-check-btn {
+      width: 100%; padding: 11px; border-radius: 8px;
+      background: var(--green); color: #fff;
+      font-size: .85rem; font-weight: 700;
+      border: none; cursor: pointer; transition: .15s; margin-bottom: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    .pay-check-btn:hover:not(:disabled) { background: #0da05d; }
+    .pay-check-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .pay-cancel-btn {
+      width: 100%; padding: 9px; border-radius: 8px;
+      background: none; color: var(--text3);
+      font-size: .8rem; font-weight: 600;
+      border: 1px solid var(--border); cursor: pointer; transition: .15s;
+    }
+    .pay-cancel-btn:hover { color: var(--text); border-color: var(--border2); }
+
+    /* ── SUCCESS MODAL ── */
+    .success-modal {
+      background: var(--surface); border-radius: 16px;
+      width: 100%; max-width: 440px;
+      box-shadow: 0 24px 64px rgba(16,24,40,.2);
+      animation: modalIn .25s cubic-bezier(.34,1.56,.64,1) both;
+      overflow: hidden;
+    }
+    .success-header {
+      background: linear-gradient(135deg, var(--green), #059669);
+      padding: 28px 24px;
+      color: #fff; text-align: center;
+    }
+    .success-icon { font-size: 3rem; margin-bottom: 10px; }
+    .success-header h3 { font-size: 1.3rem; font-weight: 800; }
+    .success-header p { font-size: .82rem; opacity: .9; margin-top: 4px; }
+    .success-body { padding: 24px; }
+    .cred-box {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden; margin-bottom: 16px;
+    }
+    .cred-head {
+      background: var(--text); color: #fff;
+      padding: 9px 14px; font-size: .73rem; font-weight: 700;
+      display: flex; align-items: center; gap: 7px; letter-spacing: .05em;
+    }
+    .cred-rows { display: flex; flex-direction: column; }
+    .cred-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 11px 14px; border-bottom: 1px solid var(--border);
+      font-size: .82rem;
+    }
+    .cred-row:last-child { border-bottom: none; }
+    .cred-row span:first-child { color: var(--text2); font-weight: 500; }
+    .cred-row .cred-val {
+      font-family: var(--fm); font-size: .78rem;
+      color: var(--text); font-weight: 700;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .copy-tiny {
+      background: none; border: 1px solid var(--border); border-radius: 4px;
+      padding: 1px 6px; font-size: .65rem; font-weight: 700; cursor: pointer;
+      color: var(--text3); transition: .12s;
+    }
+    .copy-tiny:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .success-alert {
+      background: var(--yellow-light); border: 1px solid #fec84b;
+      border-radius: 8px; padding: 12px 14px;
+      font-size: .8rem; color: #7a2e0e; margin-bottom: 16px;
+      display: flex; gap: 9px;
+    }
+    .done-btn {
+      width: 100%; padding: 11px; border-radius: 8px;
+      background: var(--blue); color: #fff;
+      font-size: .85rem; font-weight: 700;
+      border: none; cursor: pointer; transition: .15s;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    .done-btn:hover { background: #1559c7; }
+
+    /* ── ALERT TOAST ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: #fff;
+      padding: 12px 20px; border-radius: 10px;
+      font-size: .83rem; font-weight: 600;
+      box-shadow: var(--sh3); z-index: 1000;
+      display: flex; align-items: center; gap: 8px;
+      opacity: 0; transition: opacity .3s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+    .toast.ok  { background: var(--green); }
+    .toast.err { background: var(--red); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,.6);
+      text-align: center; padding: 32px 24px;
+      font-size: .8rem;
+    }
+    footer strong { color: #fff; }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:640px) {
+      .spec-strip { gap: 14px; }
+      .spec-item  { font-size: .7rem; }
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .egg-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media(max-width:400px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="n-logo" href="#">
+    <span class="n-logo-icon"><img src="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" alt="Logo"></span>
+    XAiHost
+  </a>
+  <div class="n-right">
+    <a class="n-btn" href="/panduan-user" target="_blank"><i class="fa-solid fa-book-open"></i> Panduan User</a>
+    <a class="n-btn primary" href="https://wa.me/6283152603573" target="_blank"><i class="fa-brands fa-whatsapp"></i> Hubungi Admin</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow"><span class="dot"></span> Server aktif 24/7 · Singapore</div>
+  <h1 class="hero-title">Hosting Panel Murah,<br><em>Performa Gila.</em></h1>
+  <p class="hero-sub">Pterodactyl hosting untuk Node.js & Minecraft. Jalan di VPS AMD EPYC Genoa 16-core dengan NVMe 900 MB/s — mulai dari 5rb aja.</p>
+  <div class="hero-chips">
+    <span class="chip"><i class="fa-solid fa-microchip"></i> AMD EPYC Genoa 16C</span>
+    <span class="chip green"><i class="fa-solid fa-bolt"></i> NVMe 900 MB/s</span>
+    <span class="chip"><i class="fa-solid fa-location-dot"></i> Singapore 0.72ms</span>
+    <span class="chip purple"><i class="fa-solid fa-shield-halved"></i> Uptime 24/7</span>
+    <span class="chip green"><i class="fa-solid fa-wifi"></i> 9.1 Gbps Download</span>
+  </div>
+</div>
+
+<!-- SPEC STRIP -->
+<div class="spec-strip">
+  <div class="spec-item"><i class="fa-solid fa-server"></i><span>CPU: <strong>AMD EPYC-Genoa 2396 MHz</strong></span></div>
+  <div class="spec-item"><i class="fa-solid fa-memory"></i><span>RAM: <strong>30.6 GB DDR4</strong></span></div>
+  <div class="spec-item"><i class="fa-solid fa-hard-drive"></i><span>Disk: <strong>600GB NVMe I/O ~900MB/s</strong></span></div>
+  <div class="spec-item"><i class="fa-solid fa-globe"></i><span>Network: <strong>9.1 Gbps DL / 2.2 Gbps UL</strong></span></div>
+  <div class="spec-item"><i class="fa-solid fa-location-dot"></i><span>Lokasi: <strong>Singapore · 0.72ms</strong></span></div>
+  <div class="spec-item"><i class="fa-solid fa-layer-group"></i><span>KVM Virtualization · Ubuntu 22.04</span></div>
+</div>
+
+<!-- PRICING -->
+<div class="section">
+  <div class="section-head">
+    <h2>Pilih <em>Paket</em> Kamu</h2>
+    <p>Harga terjangkau, performa nggak ngasal. Bayar QRIS, server langsung jalan.</p>
+  </div>
+
+  <div class="tab-switcher">
+    <button class="tab-btn active" id="tab-node" onclick="switchTab('node')">
+      <i class="fa-brands fa-node-js"></i> Node.js
+    </button>
+    <button class="tab-btn" id="tab-mc" onclick="switchTab('mc')">
+      <i class="fa-solid fa-cube"></i> Minecraft
+    </button>
+  </div>
+
+  <!-- NODE.JS PLANS -->
+  <div class="pricing-grid" id="plans-node">
+    <div class="plan-card" onclick="openOrder('node','starter')">
+      <div class="plan-icon pi-node"><i class="fa-brands fa-node-js"></i></div>
+      <div class="plan-name">Node.js · Starter</div>
+      <div class="plan-price">Rp5.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Cocok untuk bot ringan atau web app kecil</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>2 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>5 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>40%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Database <strong>1</strong></li>
+        <li><i class="fa-solid fa-check"></i> Bot WA / Telegram / Web</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+
+    <div class="plan-card popular" onclick="openOrder('node','basic')">
+      <div class="plan-icon pi-node"><i class="fa-brands fa-node-js"></i></div>
+      <div class="plan-name">Node.js · Basic</div>
+      <div class="plan-price">Rp10.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Untuk bot aktif atau multi-service ringan</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>4 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>10 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>60%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Database <strong>1</strong></li>
+        <li><i class="fa-solid fa-check"></i> Bot WA / Telegram / Web</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+
+    <div class="plan-card" onclick="openOrder('node','pro')">
+      <div class="plan-icon pi-node"><i class="fa-brands fa-node-js"></i></div>
+      <div class="plan-name">Node.js · Pro</div>
+      <div class="plan-price">Rp15.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Untuk aplikasi besar atau bot automation</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>6 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>15 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>80%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Database <strong>2</strong></li>
+        <li><i class="fa-solid fa-check"></i> Bot WA / Telegram / Web</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+
+    <div class="plan-card" onclick="openOrder('node','ultra')">
+      <div class="plan-icon pi-node"><i class="fa-brands fa-node-js"></i></div>
+      <div class="plan-name">Node.js · Ultra</div>
+      <div class="plan-price">Rp20.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Full power untuk proyek skala besar</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>8 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>20 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>100%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Database <strong>2</strong></li>
+        <li><i class="fa-solid fa-check"></i> Bot WA / Telegram / Web</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+  </div>
+
+  <!-- MINECRAFT PLANS -->
+  <div class="pricing-grid" id="plans-mc" style="display:none;">
+    <div class="plan-card" onclick="openOrder('mc','starter')">
+      <div class="plan-icon pi-mc"><i class="fa-solid fa-cube"></i></div>
+      <div class="plan-name">Minecraft · Starter</div>
+      <div class="plan-price">Rp10.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Main bareng teman dekat, server personal</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>2 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>8 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>60%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Slot <strong>10 Player</strong></li>
+        <li><i class="fa-solid fa-check"></i> Paper / Vanilla / Bedrock</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+
+    <div class="plan-card popular" onclick="openOrder('mc','basic')">
+      <div class="plan-icon pi-mc"><i class="fa-solid fa-cube"></i></div>
+      <div class="plan-name">Minecraft · Basic</div>
+      <div class="plan-price">Rp20.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Server komunitas kecil hingga menengah</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>4 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>15 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>80%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Slot <strong>20 Player</strong></li>
+        <li><i class="fa-solid fa-check"></i> Paper / Vanilla / Velocity</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+
+    <div class="plan-card" onclick="openOrder('mc','pro')">
+      <div class="plan-icon pi-mc"><i class="fa-solid fa-cube"></i></div>
+      <div class="plan-name">Minecraft · Pro</div>
+      <div class="plan-price">Rp35.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Server ramai dengan plugin banyak</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>6 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>25 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>100%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Slot <strong>35 Player</strong></li>
+        <li><i class="fa-solid fa-check"></i> Paper / Bedrock / Velocity</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+
+    <div class="plan-card" onclick="openOrder('mc','ultra')">
+      <div class="plan-icon pi-mc"><i class="fa-solid fa-cube"></i></div>
+      <div class="plan-name">Minecraft · Ultra</div>
+      <div class="plan-price">Rp50.000 <span>/ bulan</span></div>
+      <div class="plan-desc">Server publik skala besar & SMP serius</div>
+      <ul class="plan-specs">
+        <li><i class="fa-solid fa-check"></i> RAM <strong>8 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> Disk <strong>40 GB</strong></li>
+        <li><i class="fa-solid fa-check"></i> CPU <strong>150%</strong></li>
+        <li><i class="fa-solid fa-check"></i> Slot <strong>50 Player</strong></li>
+        <li><i class="fa-solid fa-check"></i> Paper / Bedrock / Velocity / Vanilla</li>
+      </ul>
+      <button class="plan-btn"><i class="fa-solid fa-cart-shopping"></i> Beli Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div style="background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="section" style="padding-top:56px; padding-bottom:56px;">
+    <div class="section-head" style="margin-bottom:32px;">
+      <h2>Kenapa Pilih <em>XAiHost?</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon" style="background:var(--blue-light);color:var(--blue)"><i class="fa-solid fa-bolt"></i></div><h3>NVMe 900 MB/s</h3><p>Disk super cepat — loading dunia Minecraft & deploy bot Node.js dalam hitungan detik.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:var(--green-light);color:var(--green)"><i class="fa-solid fa-location-dot"></i></div><h3>Singapore</h3><p>Latency 0.72ms dari lokal. Ping rendah untuk player Asia Tenggara.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:var(--yellow-light);color:var(--yellow)"><i class="fa-solid fa-qrcode"></i></div><h3>Bayar QRIS Instan</h3><p>Scan QRIS, bayar, server langsung dibuat otomatis. Gak perlu nunggu konfirmasi manual.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:var(--purple-light);color:var(--purple)"><i class="fa-solid fa-dragon"></i></div><h3>Panel Pterodactyl</h3><p>Panel modern dengan file manager, console, backup, schedule, dan sub-user bawaan.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:var(--orange-light);color:var(--orange)"><i class="fa-solid fa-gauge-high"></i></div><h3>AMD EPYC Genoa</h3><p>Prosesor server terkini — 16 core, 2396 MHz. Performa optimal untuk semua beban kerja.</p></div>
+      <div class="feat-card"><div class="feat-icon" style="background:var(--red-light);color:var(--red)"><i class="fa-solid fa-headset"></i></div><h3>Support via WA</h3><p>Ada masalah? Langsung chat admin via WhatsApp. Respon cepat, gak pakai bot ribet.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:6px;"><strong>XAiHost</strong> — Panel Hosting Pterodactyl</p>
+  <p>Singapore · AMD EPYC Genoa · NVMe 900MB/s · Uptime 24/7</p>
+  <p style="margin-top:10px;">
+    <a href="/panduan-user">Panduan User</a> &nbsp;·&nbsp;
+    <a href="/panduan-admin">Panduan Admin</a> &nbsp;·&nbsp;
+    <a href="https://wa.me/6283152603573">WhatsApp</a>
+  </p>
+  <p style="margin-top:10px; opacity:.5; font-size:.72rem;">© 2025 XAiHost. Pembayaran via qris.pw QRIS.</p>
+</footer>
+
+<!-- MODAL ORDER FORM -->
+<div class="modal-bg" id="modal-order">
+  <div class="modal" id="modal-order-box">
+    <div class="modal-head">
+      <div>
+        <h3 id="mo-title">Beli Paket</h3>
+        <p id="mo-sub">Isi data kamu untuk lanjut bayar</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('modal-order')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-summary">
+      <div class="modal-summary-left">
+        <strong id="mo-plan-name">—</strong>
+        <span id="mo-plan-specs">—</span>
+      </div>
+      <div class="modal-summary-price" id="mo-price">—</div>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nama / Username <span style="color:var(--red)">*</span></label>
+          <input type="text" id="f-name" placeholder="contoh: budi123" autocomplete="off"/>
+        </div>
+        <div class="form-group">
+          <label>Email <span style="color:var(--red)">*</span></label>
+          <input type="email" id="f-email" placeholder="kamu@email.com" autocomplete="off"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>No. WhatsApp <span style="color:var(--red)">*</span></label>
+        <input type="tel" id="f-phone" placeholder="08xxxxxxxxxx" autocomplete="off"/>
+      </div>
+      <div class="form-group">
+        <label>Nama Server <span style="color:var(--red)">*</span></label>
+        <input type="text" id="f-servername" placeholder="mis. MyMCServer atau DiscordBot" autocomplete="off"/>
+      </div>
+
+      <!-- MC ONLY: egg selector -->
+      <div class="mc-options" id="mc-egg-section">
+        <div class="form-group">
+          <label>Pilih Software Server</label>
+          <div class="egg-grid">
+            <div class="egg-opt selected" data-egg="paper" onclick="selectEgg(this,'paper')"><i class="fa-solid fa-cube"></i>Paper</div>
+            <div class="egg-opt" data-egg="vanilla" onclick="selectEgg(this,'vanilla')"><i class="fa-solid fa-seedling"></i>Vanilla</div>
+            <div class="egg-opt" data-egg="bedrock" onclick="selectEgg(this,'bedrock')"><i class="fa-solid fa-mobile-screen"></i>Bedrock</div>
+            <div class="egg-opt" data-egg="velocity" onclick="selectEgg(this,'velocity')"><i class="fa-solid fa-wind"></i>Velocity</div>
+            <div class="egg-opt" data-egg="waterfall" onclick="selectEgg(this,'waterfall')"><i class="fa-solid fa-water"></i>Waterfall</div>
+            <div class="egg-opt" data-egg="forge" onclick="selectEgg(this,'forge')"><i class="fa-solid fa-fire"></i>Forge</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VERSION INPUT — muncul sesuai egg -->
+      <div class="mc-options show" id="mc-version-wrap">
+        <div class="form-group" id="mc-version-group" style="display:none">
+          <label id="version-label">Versi Minecraft <span style="color:var(--red)">*</span></label>
+          <input type="text" id="f-version" placeholder="contoh: 1.21.4" autocomplete="off"/>
+          <div style="font-size:.72rem;color:var(--text3);margin-top:4px;" id="version-hint"></div>
+        </div>
+        <!-- Forge: tambahan field forge version -->
+        <div class="form-group" id="forge-version-group" style="display:none">
+          <label>Versi Forge <span style="color:var(--text3)">(opsional, kosong = recommended)</span></label>
+          <input type="text" id="f-forge-version" placeholder="contoh: 47.3.0" autocomplete="off"/>
+        </div>
+        <!-- Bedrock: server name -->
+        <div class="form-group" id="bedrock-name-group" style="display:none">
+          <label>Nama Bedrock Server <span style="color:var(--text3)">(opsional)</span></label>
+          <input type="text" id="f-bedrock-name" placeholder="Bedrock Dedicated Server" autocomplete="off"/>
+        </div>
+      </div>
+
+      <!-- COUPON -->
+      <div class="form-group" style="margin-bottom:8px">
+        <label>Kode Kupon <span style="color:var(--text3);font-weight:400">(opsional)</span></label>
+        <div class="coupon-wrap">
+          <input type="text" id="f-coupon" placeholder="Masukkan kode kupon" autocomplete="off" oninput="resetCoupon()"/>
+          <button class="coupon-btn" id="coupon-btn" onclick="validateCoupon()">Pakai</button>
+        </div>
+        <div class="coupon-result" id="coupon-result"></div>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="submitOrder()">
+        <i class="fa-solid fa-qrcode"></i> Lanjut Bayar QRIS
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PAYMENT -->
+<div class="modal-bg" id="modal-pay">
+  <div class="pay-modal">
+    <div class="pay-header">
+      <h3>Scan QRIS untuk Bayar</h3>
+      <p>Bayar via QRIS (GoPay, OVO, Dana, Shopee Pay, m-Banking)</p>
+      <div class="pay-amount" id="pay-amount">Rp0</div>
+    </div>
+    <div class="pay-body">
+      <div class="qr-wrap">
+        <img id="qr-img" src="" alt="QRIS QR Code"/>
+      </div>
+      <div class="pay-info">
+        <div class="pay-info-row"><span>ID Transaksi</span><span id="pay-txid">—</span></div>
+        <div class="pay-info-row"><span>Expired</span><span id="pay-exp">—</span></div>
+      </div>
+      <div class="pay-expired">
+        <i class="fa-solid fa-clock"></i>
+        QR berlaku <strong>10 menit</strong>. Setelah bayar klik "Cek Pembayaran".
+      </div>
+      <button class="pay-check-btn" id="check-btn" onclick="checkPayment()">
+        <i class="fa-solid fa-circle-check"></i> Cek Pembayaran
+      </button>
+      <button class="pay-cancel-btn" onclick="closeModal('modal-pay')">Batalkan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SUCCESS -->
+<div class="modal-bg" id="modal-success">
+  <div class="success-modal">
+    <div class="success-header">
+      <div class="success-icon">🎉</div>
+      <h3>Pembayaran Berhasil!</h3>
+      <p>Server kamu sudah dibuat otomatis</p>
+    </div>
+    <div class="success-body">
+      <div class="success-alert">
+        <i class="fa-solid fa-triangle-exclamation" style="flex-shrink:0;margin-top:2px;"></i>
+        <span>Simpan kredensial ini sekarang! Screenshot atau catat — tidak akan ditampilkan lagi.</span>
+      </div>
+      <div class="cred-box">
+        <div class="cred-head"><i class="fa-solid fa-server"></i> INFORMASI SERVER</div>
+        <div class="cred-rows">
+          <div class="cred-row"><span>Panel URL</span><div class="cred-val" id="cr-panel">—<button class="copy-tiny" onclick="copyVal('cr-panel')">copy</button></div></div>
+          <div class="cred-row"><span>Email Login</span><div class="cred-val" id="cr-email">—<button class="copy-tiny" onclick="copyVal('cr-email')">copy</button></div></div>
+          <div class="cred-row"><span>Password</span><div class="cred-val" id="cr-pass">—<button class="copy-tiny" onclick="copyVal('cr-pass')">copy</button></div></div>
+          <div class="cred-row"><span>Nama Server</span><div class="cred-val" id="cr-sname">—</div></div>
+          <div class="cred-row"><span>Server IP:Port</span><div class="cred-val" id="cr-addr">—<button class="copy-tiny" onclick="copyVal('cr-addr')">copy</button></div></div>
+        </div>
+      </div>
+      <div class="cred-box">
+        <div class="cred-head"><i class="fa-solid fa-receipt"></i> DETAIL TRANSAKSI</div>
+        <div class="cred-rows">
+          <div class="cred-row"><span>Paket</span><div class="cred-val" id="cr-plan">—</div></div>
+          <div class="cred-row"><span>Harga</span><div class="cred-val" id="cr-amount">—</div></div>
+          <div class="cred-row"><span>Waktu</span><div class="cred-val" id="cr-time">—</div></div>
+        </div>
+      </div>
+      <button class="done-btn" onclick="closeModal('modal-success')">
+        <i class="fa-solid fa-check"></i> Selesai — Ke Panel
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ── DATA PAKET ── */
+  const PLANS = {
+    node: {
+      starter: { name: 'Node.js · Starter', price: 5000,  specs: '2GB RAM · 5GB Disk · 40% CPU · 1 DB' },
+      basic:   { name: 'Node.js · Basic',   price: 10000, specs: '4GB RAM · 10GB Disk · 60% CPU · 1 DB' },
+      pro:     { name: 'Node.js · Pro',     price: 15000, specs: '6GB RAM · 15GB Disk · 80% CPU · 2 DB' },
+      ultra:   { name: 'Node.js · Ultra',   price: 20000, specs: '8GB RAM · 20GB Disk · 100% CPU · 2 DB' },
+    },
+    mc: {
+      starter: { name: 'Minecraft · Starter', price: 10000, specs: '2GB RAM · 8GB Disk · 60% CPU · 10 Slot' },
+      basic:   { name: 'Minecraft · Basic',   price: 20000, specs: '4GB RAM · 15GB Disk · 80% CPU · 20 Slot' },
+      pro:     { name: 'Minecraft · Pro',     price: 35000, specs: '6GB RAM · 25GB Disk · 100% CPU · 35 Slot' },
+      ultra:   { name: 'Minecraft · Ultra',   price: 50000, specs: '8GB RAM · 40GB Disk · 150% CPU · 50 Slot' },
+    }
+  };
+
+  let currentType = 'node', currentTier = 'starter', selectedEgg = 'paper', currentTxId = '';
+
+  function switchTab(tab) {
+    currentType = tab;
+    document.getElementById('plans-node').style.display = tab === 'node' ? 'grid' : 'none';
+    document.getElementById('plans-mc').style.display   = tab === 'mc'   ? 'grid' : 'none';
+    document.getElementById('tab-node').classList.toggle('active', tab === 'node');
+    document.getElementById('tab-mc').classList.toggle('active', tab === 'mc');
+  }
+
+  function openOrder(type, tier) {
+    currentType = type; currentTier = tier;
+    const p = PLANS[type][tier];
+    document.getElementById('mo-title').textContent    = 'Beli ' + p.name;
+    document.getElementById('mo-sub').textContent      = 'Isi data untuk lanjut pembayaran QRIS';
+    document.getElementById('mo-plan-name').textContent = p.name;
+    document.getElementById('mo-plan-specs').textContent = p.specs;
+    document.getElementById('mo-price').textContent    = 'Rp' + p.price.toLocaleString('id');
+    appliedCoupon = null;
+    document.getElementById('coupon-result').className = 'coupon-result';
+    document.getElementById('f-coupon').value = '';
+    document.getElementById('mc-egg-section').classList.toggle('show', type === 'mc');
+    document.getElementById('mc-version-wrap').style.display = type === 'mc' ? '' : 'none';
+    if (type === 'mc') updateVersionFields();
+    showModal('modal-order');
+  }
+
+  function selectEgg(el, egg) {
+    document.querySelectorAll('.egg-opt').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedEgg = egg;
+    updateVersionFields();
+  }
+
+  const VERSION_META = {
+    paper:     { label: 'Versi Minecraft',  hint: 'contoh: 1.21.4 — cek papermc.io/downloads', showForge: false, showBedrock: false },
+    vanilla:   { label: 'Versi Minecraft',  hint: 'contoh: 1.21.4 — cek minecraft.net/releases', showForge: false, showBedrock: false },
+    forge:     { label: 'Versi Minecraft',  hint: 'contoh: 1.20.1 — cek files.minecraftforge.net', showForge: true, showBedrock: false },
+    bedrock:   { label: 'Versi Bedrock',    hint: 'contoh: 1.21.50.07 — atau kosongkan untuk latest', showForge: false, showBedrock: true },
+    velocity:  { label: 'Versi Velocity',   hint: 'contoh: 3.3.0-SNAPSHOT atau latest', showForge: false, showBedrock: false },
+    waterfall: { label: 'Versi Waterfall',  hint: 'contoh: 1.21 (versi MC yang disupport)', showForge: false, showBedrock: false },
+  }
+
+  function updateVersionFields() {
+    const meta = VERSION_META[selectedEgg]
+    const vGroup = document.getElementById('mc-version-group')
+    const fGroup = document.getElementById('forge-version-group')
+    const bGroup = document.getElementById('bedrock-name-group')
+    const label  = document.getElementById('version-label')
+    const hint   = document.getElementById('version-hint')
+
+    if (!meta) { vGroup.style.display = 'none'; fGroup.style.display = 'none'; bGroup.style.display = 'none'; return; }
+    vGroup.style.display = 'block'
+    label.textContent = meta.label + ' *'
+    hint.textContent  = meta.hint
+    fGroup.style.display  = meta.showForge   ? 'block' : 'none'
+    bGroup.style.display  = meta.showBedrock ? 'block' : 'none'
+    // Bedrock version input label
+    if (selectedEgg === 'bedrock') {
+      label.textContent = meta.label + ' (opsional)'
+    }
+  }
+
+  let appliedCoupon = null  // { code, discount, finalPrice }
+
+  function resetCoupon() {
+    appliedCoupon = null
+    const el = document.getElementById('coupon-result')
+    el.className = 'coupon-result'
+    el.textContent = ''
+    updatePriceDisplay()
+  }
+
+  function updatePriceDisplay() {
+    const p = PLANS[currentType]?.[currentTier]
+    if (!p) return
+    if (appliedCoupon) {
+      document.getElementById('mo-price').innerHTML =
+        `<span style="text-decoration:line-through;font-size:1rem;color:var(--text3);font-weight:500">Rp${p.price.toLocaleString('id')}</span> <span style="color:var(--green)">Rp${appliedCoupon.finalPrice.toLocaleString('id')}</span>`
+    } else {
+      document.getElementById('mo-price').textContent = 'Rp' + p.price.toLocaleString('id')
+    }
+  }
+
+  async function validateCoupon() {
+    const code = document.getElementById('f-coupon').value.trim()
+    if (!code) { showToast('Masukkan kode kupon dulu', 'err'); return }
+
+    const p = PLANS[currentType]?.[currentTier]
+    if (!p) return
+
+    const btn = document.getElementById('coupon-btn')
+    btn.disabled = true
+    btn.textContent = '...'
+
+    const resultEl = document.getElementById('coupon-result')
+    resultEl.className = 'coupon-result'
+
+    try {
+      const res  = await fetch('/api/coupon/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, price: p.price })
+      })
+      const data = await res.json()
+
+      if (data.status) {
+        appliedCoupon = { code: code.toUpperCase(), discount: data.discount, finalPrice: data.finalPrice }
+        const label = data.type === 'percent'
+          ? `Diskon ${data.value}% — hemat Rp${data.discount.toLocaleString('id')}`
+          : `Diskon Rp${data.discount.toLocaleString('id')}`
+        resultEl.innerHTML = `<i class="fa-solid fa-tag"></i> ${label}`
+        resultEl.className = 'coupon-result ok'
+        updatePriceDisplay()
+      } else {
+        appliedCoupon = null
+        resultEl.innerHTML = `<i class="fa-solid fa-xmark"></i> ${data.message}`
+        resultEl.className = 'coupon-result err'
+        updatePriceDisplay()
+      }
+    } catch(e) {
+      resultEl.innerHTML = '<i class="fa-solid fa-xmark"></i> Gagal validasi kupon'
+      resultEl.className = 'coupon-result err'
+    } finally {
+      btn.disabled = false
+      btn.textContent = 'Pakai'
+    }
+  }
+
+  async function submitOrder() {
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const sname = document.getElementById('f-servername').value.trim();
+
+    if (!name || !email || !phone || !sname) {
+      showToast('Semua kolom wajib diisi!', 'err'); return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Format email tidak valid!', 'err'); return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch spin"></i> Membuat pembayaran...';
+
+    try {
+      const res = await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: currentType, tier: currentTier,
+          egg: selectedEgg,
+          couponCode: appliedCoupon?.code || '',
+          version: document.getElementById('f-version')?.value.trim() || '',
+          forgeVersion: document.getElementById('f-forge-version')?.value.trim() || '',
+          bedrockName: document.getElementById('f-bedrock-name')?.value.trim() || '',
+          name, email, phone, serverName: sname
+        })
+      });
+      const data = await res.json();
+
+      if (!data.status) { showToast(data.message || 'Gagal buat pembayaran', 'err'); return; }
+
+      // Simpan data payment ke sessionStorage agar tidak hilang saat refresh
+      const payData = {
+        id:           data.payment.id,
+        qr_image:     data.payment.qr_image,
+        amount:       data.payment.amount,
+        expired_at:   data.payment.expired_at,
+        planName:     PLANS[currentType][currentTier].name,
+        customerName: name,
+      };
+      try {
+        sessionStorage.setItem('xaihost_pay', JSON.stringify(payData));
+      } catch(e) {}
+
+      // Redirect ke halaman pembayaran yang terpisah
+      window.location.href = '/payment?id=' + encodeURIComponent(data.payment.id);
+
+    } catch(e) {
+      showToast('Gagal terhubung ke server', 'err');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-qrcode"></i> Lanjut Bayar QRIS';
+    }
+  }
+
+  async function checkPayment() {
+    if (!currentTxId) return;
+    const btn = document.getElementById('check-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch spin"></i> Mengecek...';
+
+    try {
+      const res = await fetch('/api/check-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: currentTxId })
+      });
+      const data = await res.json();
+
+      if (data.status === true && data.server) {
+        // sukses
+        const s = data.server;
+        document.getElementById('cr-panel').childNodes[0].textContent  = s.panelUrl;
+        document.getElementById('cr-email').childNodes[0].textContent  = s.email;
+        document.getElementById('cr-pass').childNodes[0].textContent   = s.password;
+        document.getElementById('cr-sname').textContent = s.serverName;
+        document.getElementById('cr-addr').childNodes[0].textContent   = s.address || '(lihat di panel)';
+        document.getElementById('cr-plan').textContent  = s.plan;
+        document.getElementById('cr-amount').textContent = 'Rp' + s.amount.toLocaleString('id');
+        document.getElementById('cr-time').textContent  = data.date + ' ' + data.time;
+        closeModal('modal-pay');
+        showModal('modal-success');
+      } else if (data.payment_status === 'pending') {
+        showToast('Pembayaran belum terdeteksi, coba lagi sebentar', '');
+      } else {
+        showToast(data.message || 'Gagal cek pembayaran', 'err');
+      }
+    } catch(e) {
+      showToast('Gagal cek pembayaran', 'err');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Cek Pembayaran';
+    }
+  }
+
+  function copyVal(id) {
+    const el = document.getElementById(id);
+    const text = el.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(text).then(() => showToast('Disalin!', 'ok'));
+  }
+
+  function showModal(id) { document.getElementById(id).classList.add('show'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+  document.querySelectorAll('.modal-bg').forEach(m => {
+    m.addEventListener('click', e => { if(e.target === m) m.classList.remove('show'); });
+  });
+
+  let toastTimer;
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (type ? ' ' + type : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>

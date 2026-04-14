@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ Primary Meta ══ -->
+  <title>Panduan Admin Panel — Pterodactyl | XAiHost</title>
+  <meta name="description" content="Panduan lengkap untuk admin panel Pterodactyl — cara buat server, kelola user, atur resource, sub-user, egg & nest, tips keamanan, dan FAQ. Khusus untuk admin XAiHost." />
+  <meta name="keywords" content="pterodactyl, panel admin, panduan pterodactyl, buat server, kelola server, pterodactyl indonesia, xbotzlauncher, xaihost, hosting game, minecraft server, bot discord" />
+  <meta name="author" content="XAiHost" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1d6ae5" />
+  <link rel="canonical" href="https://store.xbotzlauncher.site/panduan-admin" />
+  <link rel="icon" type="image/svg+xml" href="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg">
+
+  <!-- ══ Open Graph (Facebook, WhatsApp, Discord, dll) ══ -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="XAiHost" />
+  <meta property="og:title" content="Panduan Admin Panel — Pterodactyl | XAiHost" />
+  <meta property="og:description" content="Panduan lengkap untuk admin panel Pterodactyl — buat server, kelola user, atur resource, sub-user, egg & nest, tips keamanan, dan FAQ." />
+  <meta property="og:image" content="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Panduan Admin Panel Pterodactyl — XAiHost" />
+  <meta property="og:url" content="https://store.xbotzlauncher.site/panduan-admin" />
+  <meta property="og:locale" content="id_ID" />
+
+  <!-- ══ Twitter Card ══ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Panduan Admin Panel — Pterodactyl | XAiHost" />
+  <meta name="twitter:description" content="Panduan lengkap untuk admin panel Pterodactyl — buat server, kelola user, atur resource, tips keamanan, dan FAQ." />
+  <meta name="twitter:image" content="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" />
+  <meta name="twitter:image:alt" content="Panduan Admin Panel Pterodactyl — XAiHost" />
+
+  <!-- ══ Article Meta (opsional, bagus untuk SEO) ══ -->
+  <meta property="article:author" content="XAiHost" />
+  <meta property="article:section" content="Tutorial" />
+  <meta property="article:tag" content="pterodactyl" />
+  <meta property="article:tag" content="panel admin" />
+  <meta property="article:tag" content="hosting" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg:          #f0f2f5;
+      --surface:     #ffffff;
+      --surface2:    #f7f8fa;
+      --border:      #e4e7ec;
+      --border2:     #d0d5dd;
+      --text:        #101828;
+      --text2:       #475467;
+      --text3:       #98a2b3;
+      --blue:        #1d6ae5;
+      --blue-light:  #eff4ff;
+      --blue-mid:    #b2ccff;
+      --green:       #12b76a;
+      --green-light: #d1fadf;
+      --yellow:      #f79009;
+      --yellow-light:#fef0c7;
+      --red:         #f04438;
+      --red-light:   #fee4e2;
+      --purple:      #6941c6;
+      --purple-light:#f4f3ff;
+      --r:  10px;
+      --r2: 7px;
+      --sh: 0 1px 3px rgba(16,24,40,.08), 0 1px 2px rgba(16,24,40,.04);
+      --sh2:0 4px 16px rgba(16,24,40,.09);
+      --nav: 62px;
+      --side: 268px;
+      --ff: 'Plus Jakarta Sans', sans-serif;
+      --fm: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body  { font-family: var(--ff); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; user-select: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 200;
+      height: var(--nav);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 20px; gap: 12px;
+      box-shadow: var(--sh);
+    }
+    .n-logo {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 1rem; font-weight: 800; color: var(--text);
+      text-decoration: none; letter-spacing: -.02em;
+    }
+    .n-logo-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue) 0%, #6941c6 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: .85rem;
+      box-shadow: 0 2px 8px rgba(29,106,229,.35);
+      overflow: hidden;
+    }
+    .n-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .n-pill {
+      background: var(--blue-light); color: var(--blue);
+      border: 1px solid var(--blue-mid);
+      font-size: .68rem; font-weight: 700;
+      padding: 2px 9px; border-radius: 20px;
+    }
+    .n-right { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+    .n-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 13px; border-radius: 6px;
+      font-size: .78rem; font-weight: 600;
+      text-decoration: none; color: var(--text2);
+      border: 1px solid var(--border); background: var(--surface);
+      transition: .15s;
+    }
+    .n-btn:hover { background: var(--bg); color: var(--text); }
+    .n-btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .n-btn.primary:hover { background: #1559c7; }
+    #ham { display: none; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 7px 9px; cursor: pointer; color: var(--text2); margin-left: auto; }
+
+    /* ── LAYOUT ── */
+    #wrap { display: flex; padding-top: var(--nav); min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    aside {
+      width: var(--side); position: fixed;
+      top: var(--nav); bottom: 0; left: 0;
+      overflow-y: auto; background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 20px 12px;
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+    }
+    aside::-webkit-scrollbar { width: 3px; }
+    aside::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+    .s-group { margin-bottom: 24px; }
+    .s-label {
+      font-size: .65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--text3);
+      padding: 0 9px 7px; display: block;
+    }
+    .s-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7.5px 9px; border-radius: 6px;
+      font-size: .81rem; font-weight: 500; color: var(--text2);
+      cursor: pointer; text-decoration: none;
+      transition: .14s;
+    }
+    .s-link i { width: 15px; text-align: center; font-size: .78rem; opacity: .7; }
+    .s-link:hover { background: var(--bg); color: var(--text); }
+    .s-link:hover i { opacity: 1; }
+    .s-link.on { background: var(--blue-light); color: var(--blue); font-weight: 600; }
+    .s-link.on i { opacity: 1; color: var(--blue); }
+    .s-badge {
+      margin-left: auto; background: var(--yellow-light); color: var(--yellow);
+      font-size: .6rem; font-weight: 700; padding: 1px 6px; border-radius: 10px;
+    }
+
+    /* ── MAIN ── */
+    main { margin-left: var(--side); flex: 1; padding: 40px 48px; min-width: 0; }
+
+    /* ── SECTIONS ── */
+    .page { display: none; animation: up .35s ease; }
+    .page.on { display: block; }
+    @keyframes up { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── HERO STRIP ── */
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 44px;
+      margin-bottom: 32px;
+      position: relative; overflow: hidden;
+      box-shadow: var(--sh);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; right: -40px; top: -40px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,106,229,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-light); color: var(--green);
+      font-size: .7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 2.1rem; font-weight: 800;
+      letter-spacing: -.04em; line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .hero h1 em { font-style: normal; color: var(--blue); }
+    .hero p { color: var(--text2); font-size: .92rem; max-width: 520px; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip {
+      display: flex; align-items: center; gap: 5px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 11px;
+      font-size: .72rem; font-weight: 600; color: var(--text2);
+    }
+    .chip i { font-size: .65rem; color: var(--blue); }
+
+    /* ── HEADING ── */
+    h2.h { font-size: 1.2rem; font-weight: 800; letter-spacing: -.025em; margin: 36px 0 8px; display: flex; align-items: center; gap: 9px; }
+    h2.h i { color: var(--blue); font-size: 1rem; }
+    h2.h::after { content: ''; flex: 1; height: 1px; background: var(--border); margin-left: 8px; }
+    h3.h3 { font-size: .95rem; font-weight: 700; margin: 20px 0 8px; letter-spacing: -.01em; }
+    p.p { color: var(--text2); font-size: .88rem; margin-bottom: 12px; }
+
+    /* ── CARDS ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px; margin-bottom: 28px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 20px;
+      box-shadow: var(--sh); transition: .18s;
+    }
+    .card:hover { box-shadow: var(--sh2); transform: translateY(-2px); }
+    .ci {
+      width: 40px; height: 40px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: 14px;
+    }
+    .ci.b { background: var(--blue-light); color: var(--blue); }
+    .ci.g { background: var(--green-light); color: var(--green); }
+    .ci.y { background: var(--yellow-light); color: var(--yellow); }
+    .ci.p { background: var(--purple-light); color: var(--purple); }
+    .ci.r { background: var(--red-light); color: var(--red); }
+    .card h3 { font-size: .88rem; font-weight: 700; margin-bottom: 5px; }
+    .card p { font-size: .8rem; color: var(--text2); line-height: 1.55; }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 18px 20px;
+      box-shadow: var(--sh);
+    }
+    .sn {
+      width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%;
+      background: var(--blue); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 800; margin-top: 1px;
+    }
+    .step h4 { font-size: .88rem; font-weight: 700; margin-bottom: 5px; }
+    .step p  { font-size: .82rem; color: var(--text2); line-height: 1.6; }
+
+    /* ── ALERT ── */
+    .alert {
+      display: flex; gap: 12px;
+      padding: 14px 18px; border-radius: var(--r2);
+      border: 1px solid; margin: 18px 0;
+      font-size: .83rem; line-height: 1.6;
+    }
+    .alert i { margin-top: 2px; flex-shrink: 0; }
+    .info    { background: var(--blue-light);   border-color: var(--blue-mid);   color: #1e3a8a; }
+    .info  i { color: var(--blue); }
+    .warn    { background: var(--yellow-light);  border-color: #fec84b;           color: #7a2e0e; }
+    .warn  i { color: var(--yellow); }
+    .ok      { background: var(--green-light);   border-color: #6ce9a6;           color: #054f31; }
+    .ok    i { color: var(--green); }
+    .danger  { background: var(--red-light);     border-color: #fda29b;           color: #7a271a; }
+    .danger i { color: var(--red); }
+
+    /* ── TABLE ── */
+    .tw { overflow-x: auto; margin: 16px 0; border-radius: var(--r2); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: .83rem; }
+    thead { background: var(--surface2); }
+    th { padding: 10px 14px; text-align: left; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text3); border-bottom: 1px solid var(--border); }
+    td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg); }
+
+    /* ── CODE ── */
+    .cb { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r2); margin: 14px 0; overflow: hidden; box-shadow: var(--sh); }
+    .ch { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--surface2); border-bottom: 1px solid var(--border); }
+    .cl { font-family: var(--fm); font-size: .68rem; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .cl i { color: var(--blue); }
+    .cp { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 3px 9px; font-size: .68rem; font-weight: 600; color: var(--text2); cursor: pointer; display: flex; align-items: center; gap: 4px; transition: .14s; }
+    .cp:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .cp.ok2 { background: var(--green); color: #fff; border-color: var(--green); }
+    .cb pre { margin: 0; padding: 16px; font-family: var(--fm); font-size: .8rem; line-height: 1.65; overflow-x: auto; }
+    .cb pre code { background: none; padding: 0; border: none; font-size: inherit; }
+    code { font-family: var(--fm); font-size: .82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--blue); }
+
+    /* ── BADGE ── */
+    .badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 20px; font-size: .68rem; font-weight: 700; }
+    .bb { background: var(--blue-light);   color: var(--blue); }
+    .bg { background: var(--green-light);  color: var(--green); }
+    .by { background: var(--yellow-light); color: var(--yellow); }
+    .br { background: var(--red-light);    color: var(--red); }
+    .bp { background: var(--purple-light); color: var(--purple); }
+
+    /* ── SCREENSHOT MOCK ── */
+    .mock {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden;
+      box-shadow: var(--sh2); margin: 18px 0;
+    }
+    .mock-bar {
+      background: var(--surface2); border-bottom: 1px solid var(--border);
+      padding: 9px 14px; display: flex; align-items: center; gap: 10px;
+    }
+    .mock-dots { display: flex; gap: 5px; }
+    .mock-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dots span:nth-child(1) { background: #ff5f57; }
+    .mock-dots span:nth-child(2) { background: #febc2e; }
+    .mock-dots span:nth-child(3) { background: #28c840; }
+    .mock-url { background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 3px 12px; font-family: var(--fm); font-size: .71rem; color: var(--text3); flex: 1; max-width: 320px; }
+    .mock-body { padding: 20px; }
+
+    /* ── UI ELEMENT PREVIEW ── */
+    .ui-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+    .ui-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 6px; font-size: .8rem; font-weight: 600;
+      border: 1px solid;
+    }
+    .ui-btn.pri { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .ui-btn.sec { background: var(--surface); color: var(--text2); border-color: var(--border); }
+    .ui-btn.dan { background: var(--red); color: #fff; border-color: var(--red); }
+    .ui-btn.gre { background: var(--green); color: #fff; border-color: var(--green); }
+
+    /* ── DIVIDER ── */
+    .div { height: 1px; background: var(--border); margin: 32px 0; }
+
+    /* ── PANEL MENU VISUAL ── */
+    .menu-map {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 10px; margin: 16px 0;
+    }
+    .menu-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r2); padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 11px;
+      box-shadow: var(--sh); transition: .15s;
+    }
+    .menu-item:hover { border-color: var(--blue-mid); box-shadow: var(--sh2); }
+    .mi-icon { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+    .menu-item h4 { font-size: .82rem; font-weight: 700; margin-bottom: 2px; }
+    .menu-item p  { font-size: .74rem; color: var(--text3); line-height: 1.45; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px) {
+      aside { transform: translateX(-100%); z-index: 100; }
+      aside.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 28px 20px; }
+      .hero { padding: 28px 24px; }
+      .hero h1 { font-size: 1.65rem; }
+      #ham { display: flex; }
+      .n-right .n-btn:not(.primary) { display: none; }
+      #ov { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.28); z-index: 99; }
+      #ov.show { display: block; }
+    }
+    @media(max-width:480px) {
+      main { padding: 20px 14px; }
+      .grid { grid-template-columns: 1fr; }
+      h2.h { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="n-logo" href="#">
+    <span class="n-logo-icon"><img src="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" width="50px" alt="Logo Icon"></i></span>
+    PanelDocs
+  </a>
+  <span class="n-pill">Admin Guide</span>
+  <div class="n-right">
+    <a class="n-btn" href="#" onclick="showPage('overview',this)"><i class="fa-solid fa-book-open"></i> Panduan</a>
+    <a class="n-btn primary" href="https://wa.me/6283152603573"><i class="fa-brands fa-whatsapp"></i> Hubungi Admin</a>
+  </div>
+  <button id="ham" onclick="toggleSide()"><i class="fa-solid fa-bars"></i></button>
+</nav>
+
+<div id="ov" onclick="toggleSide()"></div>
+
+<div id="wrap">
+<aside id="side">
+
+  <div class="s-group">
+    <span class="s-label">Memulai</span>
+    <a class="s-link on" onclick="showPage('overview',this)"><i class="fa-solid fa-house"></i> Overview</a>
+    <a class="s-link" onclick="showPage('login',this)"><i class="fa-solid fa-right-to-bracket"></i> Login & Navigasi</a>
+    <a class="s-link" onclick="showPage('dashboard',this)"><i class="fa-solid fa-gauge"></i> Dashboard Admin</a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">Manajemen User</span>
+    <a class="s-link" onclick="showPage('user-list',this)"><i class="fa-solid fa-users"></i> Lihat & Cari User</a>
+    <a class="s-link" onclick="showPage('user-create',this)"><i class="fa-solid fa-user-plus"></i> Buat User Baru</a>
+    <a class="s-link" onclick="showPage('user-edit',this)"><i class="fa-solid fa-user-pen"></i> Edit & Hapus User</a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">Manajemen Server</span>
+    <a class="s-link" onclick="showPage('server-list',this)"><i class="fa-solid fa-server"></i> Lihat Semua Server</a>
+    <a class="s-link" onclick="showPage('server-create',this)"><i class="fa-solid fa-plus-circle"></i> Buat Server Baru</a>
+    <a class="s-link" onclick="showPage('server-edit',this)"><i class="fa-solid fa-pen-to-square"></i> Edit Server</a>
+    <a class="s-link" onclick="showPage('server-suspend',this)"><i class="fa-solid fa-ban"></i> Suspend & Hapus</a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">Fitur Lanjutan</span>
+    <a class="s-link" onclick="showPage('alloc',this)"><i class="fa-solid fa-network-wired"></i> Allocations (Port)</a>
+    <a class="s-link" onclick="showPage('database',this)"><i class="fa-solid fa-database"></i> Database Server</a>
+    <a class="s-link" onclick="showPage('subuser',this)"><i class="fa-solid fa-user-shield"></i> Sub-user & Permission</a>
+    <a class="s-link" onclick="showPage('eggs',this)"><i class="fa-solid fa-egg"></i> Egg & Nest <span class="s-badge">info</span></a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">Referensi</span>
+    <a class="s-link" onclick="showPage('tips',this)"><i class="fa-solid fa-lightbulb"></i> Tips & Batas Wajar</a>
+    <a class="s-link" onclick="showPage('faq',this)"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+  </div>
+
+</aside>
+
+<main id="main">
+
+<!-- ════════════════ OVERVIEW ════════════════ -->
+<section class="page on" id="p-overview">
+  <div class="hero">
+    <div class="hero-eyebrow"><i class="fa-solid fa-circle-check"></i> Panduan Resmi untuk Admin</div>
+    <h1>Selamat datang,<br><em>Admin Panel!</em> 👋</h1>
+    <p>Dokumen ini adalah panduan lengkap cara menggunakan Pterodactyl Panel sebagai <strong>admin</strong> — mulai dari login, buat user, buat server, sampai kelola resource.</p>
+    <div class="hero-chips">
+      <span class="chip"><i class="fa-solid fa-user-tie"></i> Role: Admin</span>
+      <span class="chip"><i class="fa-solid fa-dragon"></i> Pterodactyl v1.11</span>
+      <span class="chip"><i class="fa-solid fa-shield-halved"></i> Bukan akses root/SSH</span>
+      <span class="chip"><i class="fa-solid fa-brands fa-whatsapp"></i> Support via WA</span>
+    </div>
+  </div>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Akses kamu adalah <strong>Admin Panel</strong> — kamu bisa buat & kelola user dan server, tapi <strong>tidak bisa</strong> akses SSH, ubah konfigurasi node, atau install egg baru. Untuk itu hubungi owner.</div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-map"></i> Apa yang Bisa Kamu Lakukan?</h2>
+  <div class="grid">
+    <div class="card"><div class="ci b"><i class="fa-solid fa-users"></i></div><h3>Kelola User</h3><p>Buat, edit, reset password, dan hapus akun user yang kamu buat.</p></div>
+    <div class="card"><div class="ci g"><i class="fa-solid fa-server"></i></div><h3>Kelola Server</h3><p>Buat server baru, atur resource (RAM/CPU/disk), suspend, atau hapus server.</p></div>
+    <div class="card"><div class="ci y"><i class="fa-solid fa-network-wired"></i></div><h3>Atur Port</h3><p>Assign port (allocation) ke server sesuai ketersediaan di node.</p></div>
+    <div class="card"><div class="ci p"><i class="fa-solid fa-database"></i></div><h3>Database</h3><p>Buat database MySQL untuk server-server yang membutuhkan.</p></div>
+    <div class="card"><div class="ci r"><i class="fa-solid fa-user-shield"></i></div><h3>Sub-user</h3><p>Tambahkan sub-user ke server dengan permission terbatas.</p></div>
+    <div class="card"><div class="ci b"><i class="fa-solid fa-terminal"></i></div><h3>Monitor Server</h3><p>Lihat status, console, dan resource usage semua server.</p></div>
+  </div>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div><strong>Ingat:</strong> Semua tindakan sebagai admin <strong>tercatat</strong> di panel. Jangan buat user/server melebihi batas yang diberikan owner. Pelanggaran bisa berakibat akses dicabut.</div>
+  </div>
+</section>
+
+<!-- ════════════════ LOGIN ════════════════ -->
+<section class="page" id="p-login">
+  <div class="section-title" style="margin-bottom:4px">
+    <h2 class="h"><i class="fa-solid fa-right-to-bracket"></i> Login & Navigasi</h2>
+  </div>
+  <p class="p">Cara masuk ke panel dan memahami layout dasarnya.</p>
+
+  <h2 class="h"><i class="fa-solid fa-key"></i> Cara Login</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Buka URL Panel</h4><p>Buka browser dan akses URL panel yang diberikan owner. Contoh: <code>https://panel.domain.com</code></p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Masukkan Email & Password</h4><p>Gunakan email dan password yang dikirim owner ke kamu. Pastikan tidak ada spasi di awal/akhir password.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Klik "Sign In"</h4><p>Setelah berhasil, kamu akan diarahkan ke halaman utama panel.</p></div></div>
+    <div class="step"><div class="sn">4</div><div><h4>Akses Admin Area</h4><p>Klik avatar/nama kamu di pojok kanan atas → pilih <strong>"Admin Area"</strong> (ikon gear ⚙️). Di sinilah tempat semua fitur admin berada.</p></div></div>
+  </div>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div>Kalau tidak muncul menu "Admin Area", berarti akun kamu belum di-set sebagai admin. Hubungi owner untuk konfirmasi.</div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-compass"></i> Struktur Navigasi Panel</h2>
+  <div class="menu-map">
+    <div class="menu-item"><div class="mi-icon ci b"><i class="fa-solid fa-house"></i></div><div><h4>Dashboard</h4><p>Halaman utama, daftar server kamu</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci g"><i class="fa-solid fa-gear"></i></div><div><h4>Admin Area</h4><p>Pusat kontrol semua fitur admin</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci y"><i class="fa-solid fa-users"></i></div><div><h4>Users</h4><p>Manajemen semua user</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci p"><i class="fa-solid fa-server"></i></div><div><h4>Servers</h4><p>Lihat dan kelola semua server</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci r"><i class="fa-solid fa-location-dot"></i></div><div><h4>Nodes</h4><p>Info node (read-only untuk admin)</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci b"><i class="fa-solid fa-egg"></i></div><div><h4>Nests</h4><p>Lihat egg yang tersedia</p></div></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-lock"></i> Ganti Password</h2>
+  <p class="p">Disarankan langsung ganti password setelah pertama login.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Klik nama/avatar kanan atas → "Account"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Scroll ke bagian "Update Password"</h4><p>Isi password lama, password baru, dan konfirmasi. Klik <strong>Update Password</strong>.</p></div></div>
+  </div>
+</section>
+
+<!-- ════════════════ DASHBOARD ════════════════ -->
+<section class="page" id="p-dashboard">
+  <h2 class="h"><i class="fa-solid fa-gauge"></i> Dashboard Admin</h2>
+  <p class="p">Overview panel saat kamu masuk ke Admin Area.</p>
+
+  <div class="mock">
+    <div class="mock-bar">
+      <div class="mock-dots"><span></span><span></span><span></span></div>
+      <div class="mock-url">panel.domain.com/admin</div>
+    </div>
+    <div class="mock-body">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">
+        <div style="background:var(--blue-light);border:1px solid var(--blue-mid);border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--blue);">12</div>
+          <div style="font-size:.72rem;color:var(--text2);">Total Server</div>
+        </div>
+        <div style="background:var(--green-light);border:1px solid #6ce9a6;border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--green);">8</div>
+          <div style="font-size:.72rem;color:var(--text2);">Server Online</div>
+        </div>
+        <div style="background:var(--yellow-light);border:1px solid #fec84b;border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--yellow);">5</div>
+          <div style="font-size:.72rem;color:var(--text2);">Total User</div>
+        </div>
+        <div style="background:var(--purple-light);border:1px solid #d9d6fe;border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--purple);">2</div>
+          <div style="font-size:.72rem;color:var(--text2);">Nodes</div>
+        </div>
+      </div>
+      <div style="font-size:.78rem;color:var(--text3);text-align:center;font-style:italic;">↑ Contoh tampilan statistik Admin Area</div>
+    </div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-list"></i> Menu Cepat Admin Area</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Menu</th><th>Lokasi</th><th>Fungsi</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Overview</strong></td><td>Admin → Overview</td><td>Statistik ringkas: server, user, node</td></tr>
+        <tr><td><strong>Servers</strong></td><td>Admin → Servers</td><td>Daftar & manajemen semua server</td></tr>
+        <tr><td><strong>Users</strong></td><td>Admin → Users</td><td>Daftar & manajemen semua user</td></tr>
+        <tr><td><strong>Nodes</strong></td><td>Admin → Nodes</td><td>Info node (hanya lihat, tidak bisa edit)</td></tr>
+        <tr><td><strong>Nests & Eggs</strong></td><td>Admin → Nests</td><td>Lihat template server yang tersedia</td></tr>
+        <tr><td><strong>Databases</strong></td><td>Admin → Databases</td><td>Kelola database hosts</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ USER LIST ════════════════ -->
+<section class="page" id="p-user-list">
+  <h2 class="h"><i class="fa-solid fa-users"></i> Lihat & Cari User</h2>
+  <p class="p">Cara melihat daftar semua user dan mencari user tertentu.</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke Admin Area → Users</h4><p>Klik menu <strong>Users</strong> di sidebar Admin Area. Semua user terdaftar akan muncul dalam bentuk tabel.</p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Gunakan Search Box</h4><p>Ketik nama, email, atau username di kolom pencarian di bagian atas tabel untuk filter user.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Klik nama user untuk detail</h4><p>Klik nama user untuk melihat detail akun: server yang dimiliki, info email, status admin, dll.</p></div></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-table-columns"></i> Kolom di Tabel User</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Kolom</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Username</strong></td><td>Username unik user di panel</td></tr>
+        <tr><td><strong>Email</strong></td><td>Email login user</td></tr>
+        <tr><td><strong>Name</strong></td><td>Nama lengkap user</td></tr>
+        <tr><td><strong>Servers</strong></td><td>Jumlah server yang dimiliki user ini</td></tr>
+        <tr><td><strong>2FA</strong></td><td>Apakah user sudah aktifkan 2-factor authentication</td></tr>
+        <tr><td><strong>Admin</strong></td><td>Tanda <span class="badge bg">✓</span> jika user punya hak admin</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ USER CREATE ════════════════ -->
+<section class="page" id="p-user-create">
+  <h2 class="h"><i class="fa-solid fa-user-plus"></i> Buat User Baru</h2>
+  <p class="p">Langkah membuat akun user baru agar bisa login ke panel dan mendapat server.</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div>
+      <h4>Admin → Users → "Create New"</h4>
+      <p>Klik tombol biru <strong>Create New</strong> di pojok kanan atas halaman Users.</p>
+    </div></div>
+    <div class="step"><div class="sn">2</div><div>
+      <h4>Isi form data user</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Field</th><th>Isi dengan</th><th>Wajib?</th></tr></thead>
+          <tbody>
+            <tr><td>Email Address</td><td>Email user (untuk login)</td><td><span class="badge bg">Wajib</span></td></tr>
+            <tr><td>Username</td><td>Username unik, huruf kecil & angka</td><td><span class="badge bg">Wajib</span></td></tr>
+            <tr><td>First Name</td><td>Nama depan</td><td><span class="badge bg">Wajib</span></td></tr>
+            <tr><td>Last Name</td><td>Nama belakang</td><td><span class="badge bg">Wajib</span></td></tr>
+            <tr><td>Password</td><td>Kosongkan = panel kirim link reset via email. Isi = set manual.</td><td><span class="badge by">Opsional</span></td></tr>
+            <tr><td>Administrator</td><td>Jangan centang kecuali kamu mau kasih akses admin</td><td><span class="badge by">Opsional</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <div class="step"><div class="sn">3</div><div>
+      <h4>Klik "Create User"</h4>
+      <p>User berhasil dibuat. Kirimkan email + password ke user kamu, atau biarkan mereka set password via link email.</p>
+    </div></div>
+  </div>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>Jangan centang kolom <strong>Administrator</strong> saat buat user biasa. User yang kamu centang admin bisa akses semua server & user di panel!</div>
+  </div>
+</section>
+
+<!-- ════════════════ USER EDIT ════════════════ -->
+<section class="page" id="p-user-edit">
+  <h2 class="h"><i class="fa-solid fa-user-pen"></i> Edit & Hapus User</h2>
+
+  <h3 class="h3">Edit Data User</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Users → klik nama user</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Ubah data yang perlu</h4><p>Kamu bisa ubah email, username, nama, dan password. Klik <strong>Update User</strong> setelah selesai.</p></div></div>
+  </div>
+
+  <h3 class="h3">Reset Password User</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Buka halaman edit user</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Isi field "Password" dengan password baru</h4><p>Ketik password baru di kolom Password, lalu klik <strong>Update User</strong>. Beritahu user password barunya.</p></div></div>
+  </div>
+
+  <h3 class="h3">Hapus User</h3>
+  <div class="alert danger">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div><strong>Perhatian!</strong> Hapus user akan menghapus semua server milik user tersebut secara permanen. Pastikan sudah backup data penting sebelum menghapus.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Users → klik nama user</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Scroll ke bawah → klik "Delete User"</h4><p>Konfirmasi popup yang muncul. Tindakan ini <strong>tidak bisa dibatalkan.</strong></p></div></div>
+  </div>
+</section>
+
+<!-- ════════════════ SERVER LIST ════════════════ -->
+<section class="page" id="p-server-list">
+  <h2 class="h"><i class="fa-solid fa-server"></i> Lihat Semua Server</h2>
+  <p class="p">Cara melihat dan memonitor status semua server yang ada di panel.</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin Area → Servers</h4><p>Daftar semua server muncul. Bisa difilter berdasarkan nama, owner, atau node.</p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik nama server untuk detail</h4><p>Kamu akan masuk ke halaman manajemen server yang spesifik.</p></div></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-table"></i> Info di Tabel Server</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Kolom</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Name</strong></td><td>Nama server</td></tr>
+        <tr><td><strong>Owner</strong></td><td>User yang memiliki server</td></tr>
+        <tr><td><strong>Node</strong></td><td>Node tempat server berjalan</td></tr>
+        <tr><td><strong>Connection</strong></td><td>IP:Port server</td></tr>
+        <tr><td><strong>Memory</strong></td><td>Batas RAM server</td></tr>
+        <tr><td><strong>Disk</strong></td><td>Batas storage server</td></tr>
+        <tr><td><strong>Status</strong></td><td><span class="badge bg">Installing</span> / <span class="badge bb">Running</span> / <span class="badge br">Suspended</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ SERVER CREATE ════════════════ -->
+<section class="page" id="p-server-create">
+  <h2 class="h"><i class="fa-solid fa-plus-circle"></i> Buat Server Baru</h2>
+  <p class="p">Panduan lengkap membuat server baru dari Admin Area.</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div>
+      <h4>Admin → Servers → "Create New"</h4>
+    </div></div>
+
+    <div class="step"><div class="sn">2</div><div>
+      <h4>Isi bagian "Core Details"</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Field</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td>Server Name</td><td>Nama server (bebas, misal: <code>mc-survival-budi</code>)</td></tr>
+            <tr><td>Server Owner</td><td>Ketik email/username user pemilik server</td></tr>
+            <tr><td>Description</td><td>Deskripsi opsional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="sn">3</div><div>
+      <h4>Pilih Node & Allocation (Port)</h4>
+      <p>Pilih <strong>Node</strong> yang tersedia, lalu pilih <strong>Allocation</strong> (IP:Port) dari daftar port yang sudah disiapkan owner. <strong>Jangan pilih port yang sudah terpakai.</strong></p>
+    </div></div>
+
+    <div class="step"><div class="sn">4</div><div>
+      <h4>Atur Resource Limits</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Field</th><th>Satuan</th><th>Contoh</th><th>Catatan</th></tr></thead>
+          <tbody>
+            <tr><td>Memory</td><td>MB</td><td><code>1024</code> = 1 GB</td><td>0 = unlimited (jangan dipakai)</td></tr>
+            <tr><td>Swap</td><td>MB</td><td><code>0</code></td><td>Biarkan 0 kecuali perlu</td></tr>
+            <tr><td>Disk</td><td>MB</td><td><code>5000</code> = 5 GB</td><td>0 = unlimited (jangan dipakai)</td></tr>
+            <tr><td>CPU</td><td>%</td><td><code>100</code> = 1 core</td><td>200 = 2 core, 0 = unlimited</td></tr>
+            <tr><td>Block IO</td><td>—</td><td><code>500</code></td><td>Biarkan default</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+
+    <div class="step"><div class="sn">5</div><div>
+      <h4>Pilih Nest & Egg</h4>
+      <p>Pilih <strong>Nest</strong> (kategori, misal: <em>Minecraft</em>) lalu pilih <strong>Egg</strong> (template spesifik, misal: <em>Paper</em>). Docker image akan otomatis terisi.</p>
+    </div></div>
+
+    <div class="step"><div class="sn">6</div><div>
+      <h4>Isi Startup Variables</h4>
+      <p>Setiap egg punya variabel berbeda. Contoh di Minecraft Paper: versi server, memory flag, dsb. Isi sesuai kebutuhan user.</p>
+    </div></div>
+
+    <div class="step"><div class="sn">7</div><div>
+      <h4>Klik "Create Server"</h4>
+      <p>Server akan mulai proses instalasi. Tunggu beberapa menit hingga status berubah dari <span class="badge by">Installing</span> ke <span class="badge bb">Offline</span> (siap dijalankan).</p>
+    </div></div>
+  </div>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Proses instalasi pertama mungkin butuh <strong>2–10 menit</strong> tergantung ukuran image Docker yang diunduh. Jangan restart server saat masih installing.</div>
+  </div>
+</section>
+
+<!-- ════════════════ SERVER EDIT ════════════════ -->
+<section class="page" id="p-server-edit">
+  <h2 class="h"><i class="fa-solid fa-pen-to-square"></i> Edit Server</h2>
+  <p class="p">Cara mengubah setting server yang sudah ada.</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Servers → klik nama server</h4></div></div>
+    <div class="step"><div class="sn">2</div><div>
+      <h4>Pilih tab yang ingin diedit</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Tab</th><th>Isi</th></tr></thead>
+          <tbody>
+            <tr><td><strong>About</strong></td><td>Info dasar server, status, Docker image</td></tr>
+            <tr><td><strong>Build Configuration</strong></td><td>Ubah RAM, CPU, disk, port allocation</td></tr>
+            <tr><td><strong>Startup</strong></td><td>Ubah startup command & variabel environment</td></tr>
+            <tr><td><strong>Databases</strong></td><td>Lihat & kelola database server</td></tr>
+            <tr><td><strong>Schedules</strong></td><td>Jadwal task otomatis</td></tr>
+            <tr><td><strong>Users</strong></td><td>Kelola sub-user server</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Edit → Klik "Save Changes" / "Update Build"</h4><p>Perubahan resource (RAM/CPU) baru berlaku setelah server di-restart.</p></div></div>
+  </div>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>Mengubah <strong>Egg</strong> server akan mereset startup command. Pastikan kamu tahu apa yang kamu ubah, atau tanya owner dulu.</div>
+  </div>
+</section>
+
+<!-- ════════════════ SUSPEND & DELETE ════════════════ -->
+<section class="page" id="p-server-suspend">
+  <h2 class="h"><i class="fa-solid fa-ban"></i> Suspend & Hapus Server</h2>
+
+  <h3 class="h3">Suspend Server (Non-aktifkan Sementara)</h3>
+  <p class="p">Server yang di-suspend tidak bisa dijalankan, tapi data tetap ada.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Servers → klik server → tab "About"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik tombol "Suspend Server"</h4><p>Server langsung di-stop dan user tidak bisa akses sampai di-unsuspend.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Untuk unsuspend: klik "Unsuspend Server"</h4><p>Server bisa dijalankan kembali oleh user.</p></div></div>
+  </div>
+
+  <h3 class="h3">Reinstall Server</h3>
+  <p class="p">Reset file server ke kondisi awal (fresh install). <strong>Data server akan hilang.</strong></p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Tab "About" → klik "Reinstall Server"</h4><p>Konfirmasi popup. Proses sama seperti install ulang dari awal.</p></div></div>
+  </div>
+
+  <h3 class="h3">Hapus Server Permanen</h3>
+  <div class="alert danger">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div><strong>Data hilang permanen!</strong> Semua file, database, dan konfigurasi server akan terhapus dan tidak bisa dikembalikan.</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Servers → klik server → tab "About"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Scroll bawah → klik "Delete Server"</h4><p>Ketik nama server untuk konfirmasi, lalu klik <strong>Yes, delete this server</strong>.</p></div></div>
+  </div>
+</section>
+
+<!-- ════════════════ ALLOCATIONS ════════════════ -->
+<section class="page" id="p-alloc">
+  <h2 class="h"><i class="fa-solid fa-network-wired"></i> Allocations (Port)</h2>
+  <p class="p">Allocation adalah pasangan IP:Port yang bisa di-assign ke server.</p>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Kamu hanya bisa <strong>memilih</strong> allocation yang sudah disiapkan owner. Menambah port baru ke node harus minta ke owner, karena perlu buka firewall di VPS.</div>
+  </div>
+
+  <h3 class="h3">Assign Port Tambahan ke Server</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Servers → klik server → tab "Build Configuration"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Bagian "Allocations" → pilih port dari dropdown</h4><p>Pilih allocation yang <strong>belum terpakai</strong> dari daftar. Port yang sudah dipakai server lain tidak akan bisa dipilih.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Klik "Update Build"</h4><p>Port tambahan langsung tersedia di server. Server perlu di-restart agar port baru aktif.</p></div></div>
+  </div>
+
+  <h3 class="h3">Lihat Allocation yang Tersedia</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Nodes → klik nama node</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Tab "Allocation"</h4><p>Semua port terdaftar akan muncul. Tanda <span class="badge bg">Assigned</span> artinya sudah dipakai. Tanda <span class="badge bb">Unassigned</span> artinya masih kosong.</p></div></div>
+  </div>
+</section>
+
+<!-- ════════════════ DATABASE ════════════════ -->
+<section class="page" id="p-database">
+  <h2 class="h"><i class="fa-solid fa-database"></i> Database Server</h2>
+  <p class="p">Cara membuat database MySQL untuk server yang membutuhkan (misal: Minecraft + plugin database, web app, dll).</p>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Database host harus sudah dikonfigurasi owner sebelumnya. Jika tidak ada pilihan database host, hubungi owner.</div>
+  </div>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Servers → klik server → tab "Databases"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik "Create New Database"</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Field</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td>Database Name</td><td>Nama database (otomatis diberi prefix ID server)</td></tr>
+            <tr><td>Connection From</td><td>Dari host mana database bisa diakses. Biarkan <code>%</code> untuk akses bebas.</td></tr>
+            <tr><td>Database Host</td><td>Pilih host database yang tersedia</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Klik "Create Database"</h4><p>Database berhasil dibuat. Klik ikon <strong>mata</strong> untuk lihat password, salin info host/user/pass ke user.</p></div></div>
+  </div>
+
+  <h3 class="h3">Info Koneksi Database</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Info</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td>Host</td><td><code>db.domain.com</code> atau IP node</td></tr>
+        <tr><td>Port</td><td><code>3306</code></td></tr>
+        <tr><td>Database</td><td><code>s1_namadb</code></td></tr>
+        <tr><td>Username</td><td><code>u1_namadb</code></td></tr>
+        <tr><td>Password</td><td>Klik ikon mata di panel</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ SUB-USER ════════════════ -->
+<section class="page" id="p-subuser">
+  <h2 class="h"><i class="fa-solid fa-user-shield"></i> Sub-user & Permission</h2>
+  <p class="p">Tambahkan orang lain ke server dengan akses terbatas (tanpa jadi owner penuh).</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Buka server yang ingin ditambah sub-user</h4><p>Bisa dari Admin Area → Servers, atau dari dashboard user langsung.</p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Tab "Users" → klik "New User"</h4><p>Masukkan email pengguna (harus sudah terdaftar di panel).</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Centang permission yang diberikan</h4>
+      <div class="tw">
+        <table>
+          <thead><tr><th>Permission</th><th>Fungsi</th></tr></thead>
+          <tbody>
+            <tr><td>Control (Start/Stop)</td><td>Bisa start, stop, restart server</td></tr>
+            <tr><td>Console</td><td>Bisa lihat & kirim command ke console</td></tr>
+            <tr><td>File Manager</td><td>Bisa lihat & edit file server</td></tr>
+            <tr><td>File Create/Delete</td><td>Bisa buat & hapus file</td></tr>
+            <tr><td>SFTP</td><td>Bisa akses server via SFTP</td></tr>
+            <tr><td>Backup</td><td>Bisa buat & restore backup</td></tr>
+            <tr><td>Database</td><td>Bisa lihat info database</td></tr>
+            <tr><td>Schedule</td><td>Bisa atur jadwal otomatis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <div class="step"><div class="sn">4</div><div><h4>Klik "Invite User"</h4><p>Sub-user akan muncul di dashboard mereka dengan akses sesuai permission yang dipilih.</p></div></div>
+  </div>
+</section>
+
+<!-- ════════════════ EGGS ════════════════ -->
+<section class="page" id="p-eggs">
+  <h2 class="h"><i class="fa-solid fa-egg"></i> Egg & Nest</h2>
+  <p class="p">Informasi tentang egg (template server) yang tersedia dan cara memilihnya saat buat server.</p>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Sebagai admin panel, kamu <strong>tidak bisa import egg baru</strong>. Egg yang tersedia adalah yang sudah disiapkan owner. Kalau butuh egg baru, request ke owner.</div>
+  </div>
+
+  <h3 class="h3">Egg yang Umum Tersedia</h3>
+  <div class="grid">
+    <div class="card"><div class="ci g"><i class="fa-solid fa-cube"></i></div><h3>Minecraft</h3><p>Paper, Purpur, Vanilla, Forge, Fabric, Bedrock</p></div>
+    <div class="card"><div class="ci b"><i class="fa-brands fa-js"></i></div><h3>Node.js</h3><p>Bot Discord (Node.js 18/20), Express app</p></div>
+    <div class="card"><div class="ci p"><i class="fa-brands fa-python"></i></div><h3>Python</h3><p>Bot Python, script automation, Flask/FastAPI</p></div>
+    <div class="card"><div class="ci y"><i class="fa-solid fa-gamepad"></i></div><h3>Game Server</h3><p>CS:GO, Rust, Terraria, Valheim, dsb.</p></div>
+    <div class="card"><div class="ci r"><i class="fa-brands fa-golang"></i></div><h3>Generic</h3><p>Custom startup, shell script, dan lainnya</p></div>
+  </div>
+
+  <h3 class="h3">Cara Lihat Detail Egg</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Admin → Nests → klik nama Nest</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik nama egg untuk lihat detail</h4><p>Kamu bisa lihat Docker image yang digunakan, startup command default, dan variabel yang tersedia. Tapi jangan ubah apapun kalau tidak tahu dampaknya.</p></div></div>
+  </div>
+</section>
+
+<!-- ════════════════ TIPS ════════════════ -->
+<section class="page" id="p-tips">
+  <h2 class="h"><i class="fa-solid fa-lightbulb"></i> Tips & Batas Wajar</h2>
+  <p class="p">Panduan agar akses admin kamu tetap aman dan tidak disalahgunakan.</p>
+
+  <div class="grid">
+    <div class="card"><div class="ci b"><i class="fa-solid fa-scale-balanced"></i></div><h3>Jangan Over-allocate</h3><p>Beri resource sesuai kebutuhan. Jangan kasih RAM 10GB ke satu server kalau total node cuma 8GB.</p></div>
+    <div class="card"><div class="ci g"><i class="fa-solid fa-floppy-disk"></i></div><h3>Ingatkan User Backup</h3><p>Data server bukan tanggung jawab owner jika hilang. Ingatkan user untuk rutin backup via panel.</p></div>
+    <div class="card"><div class="ci y"><i class="fa-solid fa-eye"></i></div><h3>Monitor Resource</h3><p>Pantau server yang CPU/RAM-nya selalu tinggi. Bisa jadi ada script yang abuse resource.</p></div>
+    <div class="card"><div class="ci r"><i class="fa-solid fa-shield-halved"></i></div><h3>Jangan Share Password</h3><p>Jangan kasih password admin panel kamu ke siapapun. Kalau perlu kasih akses, buat akun terpisah.</p></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-ruler"></i> Panduan Resource Umum</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Jenis Server</th><th>RAM Ideal</th><th>CPU</th><th>Disk</th></tr></thead>
+      <tbody>
+        <tr><td>Minecraft Vanilla kecil (1–5 player)</td><td>512 MB – 1 GB</td><td>100%</td><td>2–5 GB</td></tr>
+        <tr><td>Minecraft Paper (10–20 player)</td><td>2–4 GB</td><td>150–200%</td><td>5–10 GB</td></tr>
+        <tr><td>Bot Discord (Node.js sederhana)</td><td>128–256 MB</td><td>50%</td><td>500 MB</td></tr>
+        <tr><td>Bot Python</td><td>128–512 MB</td><td>50%</td><td>500 MB</td></tr>
+        <tr><td>Web App / API (Node/Express)</td><td>256–512 MB</td><td>50–100%</td><td>1 GB</td></tr>
+        <tr><td>CS:GO / Source games</td><td>2 GB+</td><td>200%</td><td>15–30 GB</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div>Nilai <strong>CPU 100%</strong> = 1 core penuh. Kalau server butuh multi-core, set ke 200% (2 core) atau lebih. Tapi selalu tanya owner dulu berapa batas CPU yang boleh kamu berikan per server.</div>
+  </div>
+</section>
+
+<!-- ════════════════ FAQ ════════════════ -->
+<section class="page" id="p-faq">
+  <h2 class="h"><i class="fa-solid fa-circle-question"></i> FAQ</h2>
+
+  <div class="steps">
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Server sudah dibuat tapi user bilang tidak bisa login?</h4>
+      <p>Pastikan kamu sudah kirim email + password yang benar ke user. Cek ulang email yang dipakai saat buat akun. Coba reset password user dari Admin → Users.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Status server stuck "Installing" terus?</h4>
+      <p>Biasanya karena image Docker sedang diunduh dan butuh waktu. Tunggu 5–10 menit. Kalau masih stuck, hubungi owner — mungkin ada masalah di Wings atau koneksi node.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Tidak ada allocation (port) kosong yang bisa dipilih?</h4>
+      <p>Semua port sudah terpakai. Hubungi owner untuk tambah allocation baru ke node.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Bisa tidak ubah IP server?</h4>
+      <p>Tidak bisa secara langsung — allocation terikat ke IP node yang sudah diset owner. Minta ke owner untuk pindah atau tambah IP baru.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Server error / crash terus setelah start?</h4>
+      <p>Cek console server untuk pesan error. Biasanya karena: RAM kurang, file konfigurasi salah, atau versi Java tidak cocok dengan egg. Sesuaikan setting atau ganti egg.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Bisa tidak lihat log Wings / Docker dari panel?</h4>
+      <p>Tidak. Log Wings/Docker hanya bisa dilihat owner via SSH ke node. Kamu hanya bisa lihat console output server dari panel.</p>
+    </div></div>
+  </div>
+
+  <div class="div"></div>
+  <div class="alert ok">
+    <i class="fa-brands fa-whatsapp"></i>
+    <div>Masalah yang tidak ada di FAQ ini? Langsung hubungi owner via WhatsApp. Sertakan <strong>nama server</strong> dan <strong>screenshot error</strong> supaya lebih cepat ditangani!</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+    document.getElementById('p-' + id)?.classList.add('on');
+    document.querySelectorAll('.s-link').forEach(l => l.classList.remove('on'));
+    if (el) el.classList.add('on');
+    if (window.innerWidth <= 860) toggleSide();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleSide() {
+    document.getElementById('side').classList.toggle('open');
+    document.getElementById('ov').classList.toggle('show');
+  }
+
+  function copyCode(btn) {
+    const code = btn.closest('.cb').querySelector('code').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      btn.classList.add('ok2');
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-copy"></i> Copy';
+        btn.classList.remove('ok2');
+      }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

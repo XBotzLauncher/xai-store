@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Panduan User Panel — Pterodactyl | XAiHost</title>
+  <meta name="description" content="Panduan lengkap untuk user panel Pterodactyl — cara login, kelola server, file manager, console, backup, schedule, sub-user, dan FAQ. Untuk pengguna XAiHost." />
+  <meta name="keywords" content="pterodactyl, panel user, panduan pterodactyl, kelola server, file manager, backup, console, xbotzlauncher, xaihost, hosting game, minecraft server, bot discord" />
+  <meta name="author" content="XAiHost" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1d6ae5" />
+  <link rel="canonical" href="https://store.xbotzlauncher.site/panduan-user" />
+  <link rel="icon" type="image/svg+xml" href="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg">
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="XAiHost" />
+  <meta property="og:title" content="Panduan User Panel — Pterodactyl | XAiHost" />
+  <meta property="og:description" content="Panduan lengkap untuk user panel Pterodactyl — login, kelola server, file manager, backup, console, sub-user, dan FAQ." />
+  <meta property="og:image" content="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" />
+  <meta property="og:url" content="https://store.xbotzlauncher.site/panduan-user" />
+  <meta property="og:locale" content="id_ID" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Panduan User Panel — Pterodactyl | XAiHost" />
+  <meta name="twitter:image" content="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg:          #f0f2f5;
+      --surface:     #ffffff;
+      --surface2:    #f7f8fa;
+      --border:      #e4e7ec;
+      --border2:     #d0d5dd;
+      --text:        #101828;
+      --text2:       #475467;
+      --text3:       #98a2b3;
+      --blue:        #1d6ae5;
+      --blue-light:  #eff4ff;
+      --blue-mid:    #b2ccff;
+      --green:       #12b76a;
+      --green-light: #d1fadf;
+      --yellow:      #f79009;
+      --yellow-light:#fef0c7;
+      --red:         #f04438;
+      --red-light:   #fee4e2;
+      --purple:      #6941c6;
+      --purple-light:#f4f3ff;
+      --r:  10px;
+      --r2: 7px;
+      --sh: 0 1px 3px rgba(16,24,40,.08), 0 1px 2px rgba(16,24,40,.04);
+      --sh2:0 4px 16px rgba(16,24,40,.09);
+      --nav: 62px;
+      --side: 268px;
+      --ff: 'Plus Jakarta Sans', sans-serif;
+      --fm: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body  { font-family: var(--ff); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; user-select: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 200;
+      height: var(--nav);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 20px; gap: 12px;
+      box-shadow: var(--sh);
+    }
+    .n-logo {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 1rem; font-weight: 800; color: var(--text);
+      text-decoration: none; letter-spacing: -.02em;
+    }
+    .n-logo-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue) 0%, #6941c6 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: .85rem;
+      box-shadow: 0 2px 8px rgba(29,106,229,.35);
+      overflow: hidden;
+    }
+    .n-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .n-pill {
+      background: var(--green-light); color: var(--green);
+      border: 1px solid #6ce9a6;
+      font-size: .68rem; font-weight: 700;
+      padding: 2px 9px; border-radius: 20px;
+    }
+    .n-right { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+    .n-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 13px; border-radius: 6px;
+      font-size: .78rem; font-weight: 600;
+      text-decoration: none; color: var(--text2);
+      border: 1px solid var(--border); background: var(--surface);
+      transition: .15s;
+    }
+    .n-btn:hover { background: var(--bg); color: var(--text); }
+    .n-btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .n-btn.primary:hover { background: #1559c7; }
+    #ham { display: none; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 7px 9px; cursor: pointer; color: var(--text2); margin-left: auto; }
+
+    /* ── LAYOUT ── */
+    #wrap { display: flex; padding-top: var(--nav); min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    aside {
+      width: var(--side); position: fixed;
+      top: var(--nav); bottom: 0; left: 0;
+      overflow-y: auto; background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 20px 12px;
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+    }
+    aside::-webkit-scrollbar { width: 3px; }
+    aside::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+    .s-group { margin-bottom: 24px; }
+    .s-label {
+      font-size: .65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--text3);
+      padding: 0 9px 7px; display: block;
+    }
+    .s-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7.5px 9px; border-radius: 6px;
+      font-size: .81rem; font-weight: 500; color: var(--text2);
+      cursor: pointer; text-decoration: none;
+      transition: .14s;
+    }
+    .s-link i { width: 15px; text-align: center; font-size: .78rem; opacity: .7; }
+    .s-link:hover { background: var(--bg); color: var(--text); }
+    .s-link:hover i { opacity: 1; }
+    .s-link.on { background: var(--blue-light); color: var(--blue); font-weight: 600; }
+    .s-link.on i { opacity: 1; color: var(--blue); }
+    .s-badge {
+      margin-left: auto; background: var(--yellow-light); color: var(--yellow);
+      font-size: .6rem; font-weight: 700; padding: 1px 6px; border-radius: 10px;
+    }
+    .s-badge.new { background: var(--green-light); color: var(--green); }
+
+    /* ── MAIN ── */
+    main { margin-left: var(--side); flex: 1; padding: 40px 48px; min-width: 0; }
+
+    /* ── SECTIONS ── */
+    .page { display: none; animation: up .35s ease; }
+    .page.on { display: block; }
+    @keyframes up { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── HERO STRIP ── */
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 44px;
+      margin-bottom: 32px;
+      position: relative; overflow: hidden;
+      box-shadow: var(--sh);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; right: -40px; top: -40px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,106,229,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-light); color: var(--green);
+      font-size: .7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 2.1rem; font-weight: 800;
+      letter-spacing: -.04em; line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .hero h1 em { font-style: normal; color: var(--blue); }
+    .hero p { color: var(--text2); font-size: .92rem; max-width: 520px; }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip {
+      display: flex; align-items: center; gap: 5px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 11px;
+      font-size: .72rem; font-weight: 600; color: var(--text2);
+    }
+    .chip i { font-size: .65rem; color: var(--blue); }
+
+    /* ── HEADING ── */
+    h2.h { font-size: 1.2rem; font-weight: 800; letter-spacing: -.025em; margin: 36px 0 8px; display: flex; align-items: center; gap: 9px; }
+    h2.h i { color: var(--blue); font-size: 1rem; }
+    h2.h::after { content: ''; flex: 1; height: 1px; background: var(--border); margin-left: 8px; }
+    h3.h3 { font-size: .95rem; font-weight: 700; margin: 20px 0 8px; letter-spacing: -.01em; }
+    p.p { color: var(--text2); font-size: .88rem; margin-bottom: 12px; }
+
+    /* ── CARDS ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 14px; margin-bottom: 28px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 20px;
+      box-shadow: var(--sh); transition: .18s;
+    }
+    .card:hover { box-shadow: var(--sh2); transform: translateY(-2px); }
+    .ci {
+      width: 40px; height: 40px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: 14px;
+    }
+    .ci.b { background: var(--blue-light); color: var(--blue); }
+    .ci.g { background: var(--green-light); color: var(--green); }
+    .ci.y { background: var(--yellow-light); color: var(--yellow); }
+    .ci.p { background: var(--purple-light); color: var(--purple); }
+    .ci.r { background: var(--red-light); color: var(--red); }
+    .card h3 { font-size: .88rem; font-weight: 700; margin-bottom: 5px; }
+    .card p { font-size: .8rem; color: var(--text2); line-height: 1.55; }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
+    .step {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 18px 20px;
+      box-shadow: var(--sh);
+    }
+    .sn {
+      width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%;
+      background: var(--blue); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 800; margin-top: 1px;
+    }
+    .step h4 { font-size: .88rem; font-weight: 700; margin-bottom: 5px; }
+    .step p  { font-size: .82rem; color: var(--text2); line-height: 1.6; }
+
+    /* ── ALERT ── */
+    .alert {
+      display: flex; gap: 12px;
+      padding: 14px 18px; border-radius: var(--r2);
+      border: 1px solid; margin: 18px 0;
+      font-size: .83rem; line-height: 1.6;
+    }
+    .alert i { margin-top: 2px; flex-shrink: 0; }
+    .info    { background: var(--blue-light);   border-color: var(--blue-mid);   color: #1e3a8a; }
+    .info  i { color: var(--blue); }
+    .warn    { background: var(--yellow-light);  border-color: #fec84b;           color: #7a2e0e; }
+    .warn  i { color: var(--yellow); }
+    .ok      { background: var(--green-light);   border-color: #6ce9a6;           color: #054f31; }
+    .ok    i { color: var(--green); }
+    .danger  { background: var(--red-light);     border-color: #fda29b;           color: #7a271a; }
+    .danger i { color: var(--red); }
+
+    /* ── TABLE ── */
+    .tw { overflow-x: auto; margin: 16px 0; border-radius: var(--r2); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: .83rem; }
+    thead { background: var(--surface2); }
+    th { padding: 10px 14px; text-align: left; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--text3); border-bottom: 1px solid var(--border); }
+    td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg); }
+
+    /* ── CODE ── */
+    .cb { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r2); margin: 14px 0; overflow: hidden; box-shadow: var(--sh); }
+    .ch { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--surface2); border-bottom: 1px solid var(--border); }
+    .cl { font-family: var(--fm); font-size: .68rem; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .cl i { color: var(--blue); }
+    .cp { background: none; border: 1px solid var(--border); border-radius: 5px; padding: 3px 9px; font-size: .68rem; font-weight: 600; color: var(--text2); cursor: pointer; display: flex; align-items: center; gap: 4px; transition: .14s; }
+    .cp:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .cp.ok2 { background: var(--green); color: #fff; border-color: var(--green); }
+    .cb pre { margin: 0; padding: 16px; font-family: var(--fm); font-size: .8rem; line-height: 1.65; overflow-x: auto; }
+    .cb pre code { background: none; padding: 0; border: none; font-size: inherit; }
+    code { font-family: var(--fm); font-size: .82em; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; color: var(--blue); }
+
+    /* ── BADGE ── */
+    .badge { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 20px; font-size: .68rem; font-weight: 700; }
+    .bb { background: var(--blue-light);   color: var(--blue); }
+    .bg { background: var(--green-light);  color: var(--green); }
+    .by { background: var(--yellow-light); color: var(--yellow); }
+    .br { background: var(--red-light);    color: var(--red); }
+    .bp { background: var(--purple-light); color: var(--purple); }
+
+    /* ── SCREENSHOT MOCK ── */
+    .mock {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden;
+      box-shadow: var(--sh2); margin: 18px 0;
+    }
+    .mock-bar {
+      background: var(--surface2); border-bottom: 1px solid var(--border);
+      padding: 9px 14px; display: flex; align-items: center; gap: 10px;
+    }
+    .mock-dots { display: flex; gap: 5px; }
+    .mock-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dots span:nth-child(1) { background: #ff5f57; }
+    .mock-dots span:nth-child(2) { background: #febc2e; }
+    .mock-dots span:nth-child(3) { background: #28c840; }
+    .mock-url { background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 3px 12px; font-family: var(--fm); font-size: .71rem; color: var(--text3); flex: 1; max-width: 320px; }
+    .mock-body { padding: 20px; }
+
+    /* ── MENU MAP ── */
+    .menu-map {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 10px; margin: 16px 0;
+    }
+    .menu-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r2); padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 11px;
+      box-shadow: var(--sh); transition: .15s;
+    }
+    .menu-item:hover { border-color: var(--blue-mid); box-shadow: var(--sh2); }
+    .mi-icon { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+    .menu-item h4 { font-size: .82rem; font-weight: 700; margin-bottom: 2px; }
+    .menu-item p  { font-size: .74rem; color: var(--text3); line-height: 1.45; }
+
+    /* ── DIVIDER ── */
+    .div { height: 1px; background: var(--border); margin: 32px 0; }
+
+    /* ── UI BUTTONS PREVIEW ── */
+    .ui-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+    .ui-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 6px; font-size: .8rem; font-weight: 600;
+      border: 1px solid;
+    }
+    .ui-btn.pri { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .ui-btn.sec { background: var(--surface); color: var(--text2); border-color: var(--border); }
+    .ui-btn.dan { background: var(--red); color: #fff; border-color: var(--red); }
+    .ui-btn.gre { background: var(--green); color: #fff; border-color: var(--green); }
+
+    /* ── STATUS CHIP ── */
+    .status-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+    .status-chip {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 6px;
+      font-size: .78rem; font-weight: 600;
+      border: 1px solid;
+    }
+    .sc-on  { background: var(--green-light);  border-color: #6ce9a6;  color: #054f31; }
+    .sc-off { background: var(--surface2);     border-color: var(--border); color: var(--text3); }
+    .sc-err { background: var(--red-light);    border-color: #fda29b;  color: #7a271a; }
+    .sc-ins { background: var(--yellow-light); border-color: #fec84b;  color: #7a2e0e; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .dot-g { background: var(--green); }
+    .dot-r { background: var(--text3); }
+    .dot-e { background: var(--red); }
+    .dot-y { background: var(--yellow); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px) {
+      aside { transform: translateX(-100%); z-index: 100; }
+      aside.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 28px 20px; }
+      .hero { padding: 28px 24px; }
+      .hero h1 { font-size: 1.65rem; }
+      #ham { display: flex; }
+      .n-right .n-btn:not(.primary) { display: none; }
+      #ov { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.28); z-index: 99; }
+      #ov.show { display: block; }
+    }
+    @media(max-width:480px) {
+      main { padding: 20px 14px; }
+      .grid { grid-template-columns: 1fr; }
+      h2.h { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="n-logo" href="#">
+    <span class="n-logo-icon"><img src="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" width="50" alt="Logo"></span>
+    PanelDocs
+  </a>
+  <span class="n-pill">User Guide</span>
+  <div class="n-right">
+    <a class="n-btn" href="#" onclick="showPage('overview',this)"><i class="fa-solid fa-book-open"></i> Panduan</a>
+    <a class="n-btn primary" href="https://wa.me/6283152603573"><i class="fa-brands fa-whatsapp"></i> Hubungi Admin</a>
+  </div>
+  <button id="ham" onclick="toggleSide()"><i class="fa-solid fa-bars"></i></button>
+</nav>
+
+<div id="ov" onclick="toggleSide()"></div>
+
+<div id="wrap">
+<aside id="side">
+
+  <div class="s-group">
+    <span class="s-label">Memulai</span>
+    <a class="s-link on" onclick="showPage('overview',this)"><i class="fa-solid fa-house"></i> Overview</a>
+    <a class="s-link" onclick="showPage('login',this)"><i class="fa-solid fa-right-to-bracket"></i> Login & Navigasi</a>
+    <a class="s-link" onclick="showPage('dashboard',this)"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">Kelola Server</span>
+    <a class="s-link" onclick="showPage('server-control',this)"><i class="fa-solid fa-power-off"></i> Start / Stop Server</a>
+    <a class="s-link" onclick="showPage('console',this)"><i class="fa-solid fa-terminal"></i> Console & Command</a>
+    <a class="s-link" onclick="showPage('stats',this)"><i class="fa-solid fa-chart-simple"></i> Statistik Resource</a>
+    <a class="s-link" onclick="showPage('startup',this)"><i class="fa-solid fa-sliders"></i> Startup & Variabel</a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">File & Data</span>
+    <a class="s-link" onclick="showPage('filemanager',this)"><i class="fa-solid fa-folder-open"></i> File Manager</a>
+    <a class="s-link" onclick="showPage('sftp',this)"><i class="fa-solid fa-plug"></i> SFTP <span class="s-badge new">tips</span></a>
+    <a class="s-link" onclick="showPage('backup',this)"><i class="fa-solid fa-floppy-disk"></i> Backup</a>
+    <a class="s-link" onclick="showPage('database',this)"><i class="fa-solid fa-database"></i> Database</a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">Fitur Lanjutan</span>
+    <a class="s-link" onclick="showPage('schedule',this)"><i class="fa-solid fa-clock"></i> Schedule (Jadwal)</a>
+    <a class="s-link" onclick="showPage('subuser',this)"><i class="fa-solid fa-user-shield"></i> Sub-user</a>
+    <a class="s-link" onclick="showPage('network',this)"><i class="fa-solid fa-network-wired"></i> Network & Port</a>
+  </div>
+
+  <div class="s-group">
+    <span class="s-label">Referensi</span>
+    <a class="s-link" onclick="showPage('account',this)"><i class="fa-solid fa-circle-user"></i> Akun & API Key</a>
+    <a class="s-link" onclick="showPage('tips',this)"><i class="fa-solid fa-lightbulb"></i> Tips & Best Practice</a>
+    <a class="s-link" onclick="showPage('faq',this)"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+  </div>
+
+</aside>
+
+<main id="main">
+
+<!-- ════════════════ OVERVIEW ════════════════ -->
+<section class="page on" id="p-overview">
+  <div class="hero">
+    <div class="hero-eyebrow"><i class="fa-solid fa-circle-check"></i> Panduan Resmi untuk User</div>
+    <h1>Selamat datang,<br><em>Panel User!</em> 👋</h1>
+    <p>Dokumen ini adalah panduan lengkap cara menggunakan Pterodactyl Panel sebagai <strong>user</strong> — mulai dari login, kelola server, file manager, backup, sampai schedule otomatis.</p>
+    <div class="hero-chips">
+      <span class="chip"><i class="fa-solid fa-user"></i> Role: User</span>
+      <span class="chip"><i class="fa-solid fa-dragon"></i> Pterodactyl v1.11</span>
+      <span class="chip"><i class="fa-solid fa-shield-halved"></i> Tanpa akses root/SSH</span>
+      <span class="chip"><i class="fa-brands fa-whatsapp"></i> Support via WA</span>
+    </div>
+  </div>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Kamu login sebagai <strong>User</strong> — kamu hanya bisa mengelola server yang sudah diberikan ke akun kamu. Untuk request server baru, tambah resource, atau masalah teknis lainnya, hubungi admin.</div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-map"></i> Apa yang Bisa Kamu Lakukan?</h2>
+  <div class="grid">
+    <div class="card"><div class="ci b"><i class="fa-solid fa-power-off"></i></div><h3>Kontrol Server</h3><p>Start, stop, dan restart server kamu kapan saja lewat panel.</p></div>
+    <div class="card"><div class="ci g"><i class="fa-solid fa-terminal"></i></div><h3>Console</h3><p>Lihat output log server secara live dan kirim command langsung dari browser.</p></div>
+    <div class="card"><div class="ci y"><i class="fa-solid fa-folder-open"></i></div><h3>File Manager</h3><p>Upload, download, edit, rename, dan hapus file server lewat panel.</p></div>
+    <div class="card"><div class="ci p"><i class="fa-solid fa-floppy-disk"></i></div><h3>Backup</h3><p>Buat backup server dan restore kapan saja jika ada yang error.</p></div>
+    <div class="card"><div class="ci r"><i class="fa-solid fa-clock"></i></div><h3>Schedule</h3><p>Atur jadwal otomatis — misalnya restart server setiap malam jam 3.</p></div>
+    <div class="card"><div class="ci b"><i class="fa-solid fa-user-shield"></i></div><h3>Sub-user</h3><p>Kasih akses terbatas ke teman untuk bantu kelola server kamu.</p></div>
+  </div>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div><strong>Penting:</strong> Kamu <strong>tidak bisa</strong> buat server sendiri, tambah port, atau ubah resource (RAM/CPU/disk). Semua itu harus minta ke admin. Kalau ada kendala, langsung hubungi via WhatsApp.</div>
+  </div>
+</section>
+
+<!-- ════════════════ LOGIN ════════════════ -->
+<section class="page" id="p-login">
+  <h2 class="h"><i class="fa-solid fa-right-to-bracket"></i> Login & Navigasi</h2>
+  <p class="p">Cara masuk ke panel dan memahami layout dasarnya.</p>
+
+  <h2 class="h"><i class="fa-solid fa-key"></i> Cara Login</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Buka URL Panel</h4><p>Buka browser dan akses URL panel yang diberikan admin. Contoh: <code>https://panel.domain.com</code></p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Masukkan Email & Password</h4><p>Gunakan email dan password yang dikirim admin ke kamu. Pastikan tidak ada spasi di awal/akhir password.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Klik "Sign In"</h4><p>Setelah berhasil, kamu akan langsung diarahkan ke Dashboard yang berisi daftar server kamu.</p></div></div>
+  </div>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div>Kalau lupa password, klik <strong>"Forgot Password"</strong> di halaman login dan masukkan emailmu. Link reset akan dikirim ke email (cek folder spam juga ya).</div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-compass"></i> Struktur Navigasi Panel</h2>
+  <div class="menu-map">
+    <div class="menu-item"><div class="mi-icon ci b"><i class="fa-solid fa-house"></i></div><div><h4>Dashboard</h4><p>Halaman utama, daftar server kamu</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci g"><i class="fa-solid fa-server"></i></div><div><h4>Server</h4><p>Klik server → masuk ke halaman kontrol</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci y"><i class="fa-solid fa-terminal"></i></div><div><h4>Console</h4><p>Tab pertama di dalam server</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci p"><i class="fa-solid fa-folder-open"></i></div><div><h4>Files</h4><p>File manager server</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci r"><i class="fa-solid fa-floppy-disk"></i></div><div><h4>Backups</h4><p>Kelola backup server</p></div></div>
+    <div class="menu-item"><div class="mi-icon ci b"><i class="fa-solid fa-circle-user"></i></div><div><h4>Account</h4><p>Pengaturan akun & API key</p></div></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-lock"></i> Ganti Password</h2>
+  <p class="p">Disarankan langsung ganti password setelah pertama kali login.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Klik nama/avatar di pojok kanan atas → "Account"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Scroll ke bagian "Update Password"</h4><p>Isi password lama, password baru, dan konfirmasi. Klik <strong>Update Password</strong>.</p></div></div>
+  </div>
+</section>
+
+<!-- ════════════════ DASHBOARD ════════════════ -->
+<section class="page" id="p-dashboard">
+  <h2 class="h"><i class="fa-solid fa-gauge"></i> Dashboard</h2>
+  <p class="p">Tampilan utama setelah login — berisi daftar semua server yang kamu miliki.</p>
+
+  <div class="mock">
+    <div class="mock-bar">
+      <div class="mock-dots"><span></span><span></span><span></span></div>
+      <div class="mock-url">panel.domain.com</div>
+    </div>
+    <div class="mock-body">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--green);"></div>
+            <span style="font-size:.82rem;font-weight:700;">Minecraft Server</span>
+          </div>
+          <div style="font-size:.73rem;color:var(--text3);">play.tarazky.my.id • Port 25565</div>
+          <div style="display:flex;gap:6px;margin-top:10px;font-size:.7rem;">
+            <span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:10px;font-weight:700;">Online</span>
+            <span style="background:var(--blue-light);color:var(--blue);padding:2px 8px;border-radius:10px;font-weight:700;">512 MB RAM</span>
+          </div>
+        </div>
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--text3);"></div>
+            <span style="font-size:.82rem;font-weight:700;">Discord Bot</span>
+          </div>
+          <div style="font-size:.73rem;color:var(--text3);">Node.js 20 • Port 3000</div>
+          <div style="display:flex;gap:6px;margin-top:10px;font-size:.7rem;">
+            <span style="background:var(--surface);color:var(--text3);border:1px solid var(--border);padding:2px 8px;border-radius:10px;font-weight:700;">Offline</span>
+            <span style="background:var(--blue-light);color:var(--blue);padding:2px 8px;border-radius:10px;font-weight:700;">256 MB RAM</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:.76rem;color:var(--text3);margin-top:14px;text-align:center;font-style:italic;">↑ Contoh tampilan Dashboard</div>
+    </div>
+  </div>
+
+  <h3 class="h3">Status Server</h3>
+  <div class="status-row">
+    <div class="status-chip sc-on"><span class="dot dot-g"></span> Online — Server berjalan normal</div>
+    <div class="status-chip sc-off"><span class="dot dot-r"></span> Offline — Server tidak aktif</div>
+    <div class="status-chip sc-err"><span class="dot dot-e"></span> Crashed — Server error, perlu distart ulang</div>
+    <div class="status-chip sc-ins"><span class="dot dot-y"></span> Installing — Sedang proses instalasi</div>
+  </div>
+</section>
+
+<!-- ════════════════ SERVER CONTROL ════════════════ -->
+<section class="page" id="p-server-control">
+  <h2 class="h"><i class="fa-solid fa-power-off"></i> Start / Stop Server</h2>
+  <p class="p">Cara menghidupkan, mematikan, dan merestart server dari panel.</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Klik server di Dashboard</h4><p>Klik nama server yang ingin dikontrol. Kamu akan masuk ke halaman <strong>Console</strong> server tersebut.</p></div></div>
+    <div class="step"><div class="sn">2</div><div>
+      <h4>Gunakan tombol kontrol di kanan atas Console</h4>
+      <div class="ui-row" style="margin-top:10px;">
+        <span class="ui-btn gre"><i class="fa-solid fa-play"></i> Start</span>
+        <span class="ui-btn sec"><i class="fa-solid fa-stop"></i> Stop</span>
+        <span class="ui-btn pri"><i class="fa-solid fa-rotate-right"></i> Restart</span>
+        <span class="ui-btn dan"><i class="fa-solid fa-skull"></i> Kill</span>
+      </div>
+      <p style="margin-top:10px;">Gunakan <strong>Kill</strong> hanya kalau server hang total dan tidak bisa di-stop secara normal.</p>
+    </div></div>
+  </div>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>Selalu gunakan <strong>Stop</strong> (bukan Kill) untuk mematikan server secara normal — agar data tersimpan dengan benar. Kill akan memotong proses secara paksa dan bisa menyebabkan data corrupt.</div>
+  </div>
+
+  <h3 class="h3">Tabel Tombol Kontrol</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Tombol</th><th>Fungsi</th><th>Kapan Dipakai</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge bg">Start</span></td><td>Menghidupkan server</td><td>Server sedang Offline</td></tr>
+        <tr><td><span class="badge bb">Restart</span></td><td>Stop lalu Start otomatis</td><td>Setelah update config, plugin</td></tr>
+        <tr><td><span class="badge by">Stop</span></td><td>Matikan server dengan aman</td><td>Mau maintenance / update</td></tr>
+        <tr><td><span class="badge br">Kill</span></td><td>Paksa matikan proses</td><td>Server hang / tidak responsif</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ CONSOLE ════════════════ -->
+<section class="page" id="p-console">
+  <h2 class="h"><i class="fa-solid fa-terminal"></i> Console & Command</h2>
+  <p class="p">Melihat output log server secara live dan mengirim command langsung dari browser.</p>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Console di panel adalah <strong>console server</strong>, bukan terminal Linux. Kamu tidak bisa menjalankan command bash — hanya command yang dikenali aplikasi server (misalnya command Minecraft, command bot, dll).</div>
+  </div>
+
+  <h3 class="h3">Cara Kirim Command</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke Console server</h4><p>Klik nama server → otomatis masuk ke tab Console.</p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Ketik command di kotak input bawah</h4><p>Kotak teks di bagian paling bawah halaman Console. Tekan <code>Enter</code> untuk kirim.</p></div></div>
+  </div>
+
+  <h3 class="h3">Contoh Command Umum</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Jenis Server</th><th>Contoh Command</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>Minecraft</td><td><code>op NamaPlayer</code></td><td>Jadikan player sebagai OP</td></tr>
+        <tr><td>Minecraft</td><td><code>say Halo semua!</code></td><td>Kirim pesan ke semua player</td></tr>
+        <tr><td>Minecraft</td><td><code>stop</code></td><td>Stop server dengan aman (sama dengan tombol Stop)</td></tr>
+        <tr><td>Minecraft</td><td><code>whitelist add NamaPlayer</code></td><td>Tambah ke whitelist</td></tr>
+        <tr><td>Node.js bot</td><td><code>restart</code></td><td>(tergantung implementasi bot-mu)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div>Console otomatis <strong>scroll ke bawah</strong> mengikuti log terbaru. Klik di area log jika ingin scroll manual ke atas untuk baca log lama.</div>
+  </div>
+</section>
+
+<!-- ════════════════ STATS ════════════════ -->
+<section class="page" id="p-stats">
+  <h2 class="h"><i class="fa-solid fa-chart-simple"></i> Statistik Resource</h2>
+  <p class="p">Pantau penggunaan RAM, CPU, dan Disk server kamu secara real-time.</p>
+
+  <div class="mock">
+    <div class="mock-bar">
+      <div class="mock-dots"><span></span><span></span><span></span></div>
+      <div class="mock-url">panel.domain.com/server/xxx/console</div>
+    </div>
+    <div class="mock-body">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        <div style="background:var(--blue-light);border:1px solid var(--blue-mid);border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:800;color:var(--blue);">34%</div>
+          <div style="font-size:.72rem;color:var(--text2);">CPU Usage</div>
+        </div>
+        <div style="background:var(--green-light);border:1px solid #6ce9a6;border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:800;color:var(--green);">312 MB</div>
+          <div style="font-size:.72rem;color:var(--text2);">RAM / 512 MB</div>
+        </div>
+        <div style="background:var(--yellow-light);border:1px solid #fec84b;border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:800;color:var(--yellow);">2.1 GB</div>
+          <div style="font-size:.72rem;color:var(--text2);">Disk / 5 GB</div>
+        </div>
+      </div>
+      <div style="font-size:.76rem;color:var(--text3);margin-top:12px;text-align:center;font-style:italic;">↑ Stat muncul di bagian atas Console saat server Online</div>
+    </div>
+  </div>
+
+  <h3 class="h3">Arti Setiap Metrik</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Metrik</th><th>Penjelasan</th><th>Tips</th></tr></thead>
+      <tbody>
+        <tr><td><strong>CPU %</strong></td><td>Persentase CPU yang digunakan. 100% = 1 core penuh.</td><td>Kalau selalu >90%, server butuh optimasi atau tambah CPU.</td></tr>
+        <tr><td><strong>RAM</strong></td><td>Memori yang dipakai vs batas yang diberikan.</td><td>Kalau mendekati batas, server bisa crash. Hubungi admin untuk tambah RAM.</td></tr>
+        <tr><td><strong>Disk</strong></td><td>Ukuran total file server vs batas disk.</td><td>Hapus file log atau world lama jika disk hampir penuh.</td></tr>
+        <tr><td><strong>Network</strong></td><td>Lalu lintas data masuk/keluar server (RX/TX).</td><td>Traffic tinggi saat banyak player atau transfer file besar.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ STARTUP ════════════════ -->
+<section class="page" id="p-startup">
+  <h2 class="h"><i class="fa-solid fa-sliders"></i> Startup & Variabel</h2>
+  <p class="p">Mengubah pengaturan startup server seperti versi, port, atau variabel khusus egg.</p>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>Tab <strong>Startup</strong> berisi variabel yang mempengaruhi cara server dijalankan. Ubah hanya jika kamu tahu apa yang kamu ubah. Kesalahan di sini bisa menyebabkan server gagal start.</div>
+  </div>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → klik tab "Startup"</h4><p>Tab Startup ada di bagian atas halaman server, sejajar dengan Console, Files, dsb.</p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Ubah nilai variabel yang diinginkan</h4><p>Contoh: ubah versi Minecraft dari <code>1.20.4</code> ke <code>1.21.1</code>. Atau ubah nama file JAR kalau kamu ganti server software.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Klik "Update" lalu Restart server</h4><p>Perubahan startup baru berlaku setelah server di-restart.</p></div></div>
+  </div>
+
+  <h3 class="h3">Variabel Umum</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Variabel</th><th>Contoh Nilai</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>Server JAR File</td><td><code>server.jar</code></td><td>Nama file JAR yang dijalankan</td></tr>
+        <tr><td>Minecraft Version</td><td><code>1.21.1</code></td><td>Versi Minecraft yang didownload saat install</td></tr>
+        <tr><td>Build Number</td><td><code>latest</code></td><td>Build Paper/Purpur (bisa spesifik atau "latest")</td></tr>
+        <tr><td>Bot File</td><td><code>index.js</code></td><td>File entry point untuk bot Node.js</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ FILE MANAGER ════════════════ -->
+<section class="page" id="p-filemanager">
+  <h2 class="h"><i class="fa-solid fa-folder-open"></i> File Manager</h2>
+  <p class="p">Upload, download, edit, rename, dan hapus file server langsung dari browser.</p>
+
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → klik tab "Files"</h4><p>Kamu akan melihat struktur folder server kamu.</p></div></div>
+    <div class="step"><div class="sn">2</div><div>
+      <h4>Pilih aksi yang diinginkan</h4>
+      <div class="tw" style="margin-top:10px;">
+        <table>
+          <thead><tr><th>Aksi</th><th>Cara</th></tr></thead>
+          <tbody>
+            <tr><td>Upload file</td><td>Klik tombol <strong>Upload</strong> di kanan atas, atau drag & drop file ke area file manager</td></tr>
+            <tr><td>Buat folder baru</td><td>Klik <strong>New Folder</strong>, beri nama</td></tr>
+            <tr><td>Edit file teks</td><td>Klik nama file → editor teks online terbuka</td></tr>
+            <tr><td>Rename / Move</td><td>Klik kanan (atau <strong>⋮</strong>) pada file → Rename / Move</td></tr>
+            <tr><td>Download file</td><td>Klik kanan → Download</td></tr>
+            <tr><td>Hapus file</td><td>Klik kanan → Delete (konfirmasi dulu!)</td></tr>
+            <tr><td>Compress / Extract</td><td>Klik kanan → Archive / Unarchive (untuk .zip, .tar.gz)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>File manager di panel cocok untuk file kecil. Untuk upload file besar (>50 MB), disarankan pakai <strong>SFTP</strong> agar lebih cepat dan stabil.</div>
+  </div>
+
+  <h3 class="h3">Struktur Folder Umum (Minecraft)</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Folder/File</th><th>Isi</th></tr></thead>
+      <tbody>
+        <tr><td><code>/plugins/</code></td><td>Folder plugin server</td></tr>
+        <tr><td><code>/world/</code></td><td>Data dunia (jangan dihapus sembarangan!)</td></tr>
+        <tr><td><code>server.properties</code></td><td>Konfigurasi utama server (port, gamemode, dll)</td></tr>
+        <tr><td><code>bukkit.yml</code> / <code>spigot.yml</code></td><td>Konfigurasi Bukkit/Spigot</td></tr>
+        <tr><td><code>logs/</code></td><td>File log server (aman dihapus kalau disk penuh)</td></tr>
+        <tr><td><code>server.jar</code></td><td>File JAR server utama</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ SFTP ════════════════ -->
+<section class="page" id="p-sftp">
+  <h2 class="h"><i class="fa-solid fa-plug"></i> SFTP</h2>
+  <p class="p">Akses file server menggunakan client SFTP seperti FileZilla atau WinSCP — lebih cepat untuk file besar.</p>
+
+  <h3 class="h3">Cara Dapat Info SFTP</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → tab "Settings"</h4><p>Scroll ke bagian <strong>SFTP Details</strong>.</p></div></div>
+    <div class="step"><div class="sn">2</div><div>
+      <h4>Catat info koneksi SFTP</h4>
+      <div class="tw" style="margin-top:10px;">
+        <table>
+          <thead><tr><th>Field</th><th>Contoh Nilai</th></tr></thead>
+          <tbody>
+            <tr><td>Host</td><td><code>panel.domain.com</code></td></tr>
+            <tr><td>Port</td><td><code>2022</code></td></tr>
+            <tr><td>Username</td><td><code>u1.serverid</code> (unik per server)</td></tr>
+            <tr><td>Password</td><td>Password akun panel kamu</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Buka FileZilla / WinSCP</h4><p>Masukkan Host, Port, Username, dan Password di atas. Gunakan protocol <strong>SFTP</strong>.</p></div></div>
+  </div>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div>Rekomendasi client SFTP gratis: <strong>FileZilla</strong> (Windows/Mac/Linux) atau <strong>WinSCP</strong> (Windows). Untuk HP Android bisa pakai <strong>Cx File Explorer</strong>.</div>
+  </div>
+</section>
+
+<!-- ════════════════ BACKUP ════════════════ -->
+<section class="page" id="p-backup">
+  <h2 class="h"><i class="fa-solid fa-floppy-disk"></i> Backup</h2>
+  <p class="p">Buat backup server dan restore jika ada data yang hilang atau error.</p>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Jumlah slot backup yang kamu punya tergantung dari yang diberikan admin. Kalau slot habis, hapus backup lama sebelum buat yang baru.</div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-plus"></i> Buat Backup Baru</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → tab "Backups"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik "Create Backup"</h4><p>Isi nama backup (opsional) dan daftar file/folder yang ingin di-exclude (opsional — biasanya biarkan kosong).</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Tunggu proses selesai</h4><p>Status backup akan berubah dari <span class="badge by">In Progress</span> menjadi <span class="badge bg">Completed</span>. Jangan restart server saat backup berjalan.</p></div></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-rotate-left"></i> Restore Backup</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Klik ikon <strong>⋮</strong> (titik tiga) di samping backup</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Pilih "Restore"</h4><p>Panel akan meminta konfirmasi. Centang persetujuan bahwa file yang ada akan ditimpa, lalu klik <strong>Restore</strong>.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Tunggu proses restore selesai</h4><p>Server akan otomatis stop, restore, lalu bisa kamu start kembali secara manual.</p></div></div>
+  </div>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div><strong>Perhatian:</strong> Restore akan <strong>menimpa semua file server saat ini</strong> dengan isi backup. Pastikan kamu sudah yakin sebelum restore. Buat backup baru terlebih dahulu jika ragu.</div>
+  </div>
+
+  <h3 class="h3">Aksi Backup Lainnya</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Aksi</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>Download</td><td>Unduh file backup (.tar.gz) ke komputer kamu</td></tr>
+        <tr><td>Lock</td><td>Kunci backup agar tidak bisa dihapus secara tidak sengaja</td></tr>
+        <tr><td>Delete</td><td>Hapus backup untuk bebaskan slot</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ DATABASE ════════════════ -->
+<section class="page" id="p-database">
+  <h2 class="h"><i class="fa-solid fa-database"></i> Database</h2>
+  <p class="p">Lihat dan kelola database MySQL yang terhubung ke server kamu.</p>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Database hanya tersedia jika admin sudah membuatkannya untuk server kamu. Kalau tab Database tidak ada atau kosong, hubungi admin untuk request database.</div>
+  </div>
+
+  <h3 class="h3">Cara Lihat Info Database</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → tab "Databases"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div>
+      <h4>Lihat kredensial database</h4>
+      <div class="tw" style="margin-top:10px;">
+        <table>
+          <thead><tr><th>Field</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td>Database Name</td><td>Nama database MySQL</td></tr>
+            <tr><td>Host</td><td>Hostname/IP database server</td></tr>
+            <tr><td>Port</td><td>Port MySQL (biasanya 3306)</td></tr>
+            <tr><td>Username</td><td>Username untuk login ke database</td></tr>
+            <tr><td>Password</td><td>Klik ikon mata 👁 untuk tampilkan password</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+  </div>
+
+  <h3 class="h3">Akses via phpMyAdmin</h3>
+  <p class="p">Kalau admin sudah setup phpMyAdmin, kamu bisa klik tombol <strong>"Open in phpMyAdmin"</strong> di samping database untuk langsung akses via web UI.</p>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div>Gunakan info kredensial database ini di file konfigurasi plugin atau aplikasi kamu. Contoh: di <code>config.yml</code> plugin MySQL, atau di file <code>.env</code> aplikasi Node.js.</div>
+  </div>
+</section>
+
+<!-- ════════════════ SCHEDULE ════════════════ -->
+<section class="page" id="p-schedule">
+  <h2 class="h"><i class="fa-solid fa-clock"></i> Schedule (Jadwal Otomatis)</h2>
+  <p class="p">Atur task otomatis yang dijalankan secara terjadwal — seperti restart server tiap malam.</p>
+
+  <h2 class="h"><i class="fa-solid fa-plus"></i> Buat Schedule Baru</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → tab "Schedules"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik "Create Schedule"</h4><p>Beri nama jadwal dan atur waktu dalam format <strong>cron expression</strong>.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Tambahkan Task ke jadwal</h4><p>Setelah schedule dibuat, klik nama schedule → klik <strong>New Task</strong>. Pilih jenis task dan isikan detail.</p></div></div>
+  </div>
+
+  <h3 class="h3">Contoh Cron Expression</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Cron</th><th>Artinya</th></tr></thead>
+      <tbody>
+        <tr><td><code>0 3 * * *</code></td><td>Setiap hari jam 03:00 (tengah malam)</td></tr>
+        <tr><td><code>*/30 * * * *</code></td><td>Setiap 30 menit sekali</td></tr>
+        <tr><td><code>0 */6 * * *</code></td><td>Setiap 6 jam sekali</td></tr>
+        <tr><td><code>0 12 * * 1</code></td><td>Setiap Senin jam 12:00</td></tr>
+        <tr><td><code>0 0 * * *</code></td><td>Setiap hari tengah malam (jam 00:00)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="h3">Jenis Task yang Tersedia</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Task</th><th>Fungsi</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Send Command</strong></td><td>Kirim command ke console server</td><td><code>say Server akan restart dalam 1 menit!</code></td></tr>
+        <tr><td><strong>Send Power Action</strong></td><td>Start / Stop / Restart / Kill server</td><td>Restart otomatis</td></tr>
+        <tr><td><strong>Create Backup</strong></td><td>Buat backup otomatis</td><td>Backup harian</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div><strong>Contoh penggunaan keren:</strong> Buat schedule restart harian jam 3 pagi dengan 2 task berurutan — task 1: <code>say Server restart dalam 5 menit!</code>, tunggu 5 menit → task 2: <code>restart</code>. Player keburu siap-siap!</div>
+  </div>
+</section>
+
+<!-- ════════════════ SUB-USER ════════════════ -->
+<section class="page" id="p-subuser">
+  <h2 class="h"><i class="fa-solid fa-user-shield"></i> Sub-user</h2>
+  <p class="p">Kasih akses terbatas ke orang lain untuk bantu kelola server kamu tanpa kasih password akun utama.</p>
+
+  <h2 class="h"><i class="fa-solid fa-user-plus"></i> Tambah Sub-user</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → tab "Users"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik "New User"</h4><p>Masukkan <strong>email</strong> orang yang ingin kamu ajak. Mereka harus sudah punya akun di panel ini.</p></div></div>
+    <div class="step"><div class="sn">3</div><div>
+      <h4>Pilih permission yang diberikan</h4>
+      <div class="tw" style="margin-top:10px;">
+        <table>
+          <thead><tr><th>Permission</th><th>Fungsi</th></tr></thead>
+          <tbody>
+            <tr><td>Control (Start/Stop)</td><td>Bisa start, stop, restart server</td></tr>
+            <tr><td>Console</td><td>Bisa lihat & kirim command ke console</td></tr>
+            <tr><td>File Manager</td><td>Bisa lihat & buka file</td></tr>
+            <tr><td>File Create/Delete</td><td>Bisa buat & hapus file</td></tr>
+            <tr><td>SFTP</td><td>Bisa akses server via SFTP</td></tr>
+            <tr><td>Backup</td><td>Bisa buat & restore backup</td></tr>
+            <tr><td>Database</td><td>Bisa lihat info database</td></tr>
+            <tr><td>Schedule</td><td>Bisa atur jadwal otomatis</td></tr>
+            <tr><td>Users (sub-user)</td><td>Bisa tambah/hapus sub-user lain</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div></div>
+    <div class="step"><div class="sn">4</div><div><h4>Klik "Invite User"</h4><p>Server akan muncul di dashboard mereka dengan akses sesuai permission yang kamu pilih.</p></div></div>
+  </div>
+
+  <div class="alert warn">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>Hati-hati memberikan permission <strong>File Create/Delete</strong> atau <strong>Users</strong> kepada orang yang belum kamu percaya penuh. Sub-user dengan permission ini bisa mengubah atau menghapus file penting servermu.</div>
+  </div>
+</section>
+
+<!-- ════════════════ NETWORK ════════════════ -->
+<section class="page" id="p-network">
+  <h2 class="h"><i class="fa-solid fa-network-wired"></i> Network & Port</h2>
+  <p class="p">Informasi tentang port dan jaringan yang digunakan server kamu.</p>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Sebagai user, kamu <strong>tidak bisa menambah atau mengganti port</strong> sendiri. Port sudah ditentukan admin saat server dibuat. Untuk request port tambahan, hubungi admin.</div>
+  </div>
+
+  <h3 class="h3">Cara Lihat Port Server</h3>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Masuk ke server → tab "Network"</h4><p>Kamu akan melihat daftar port (allocation) yang terhubung ke server.</p></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Bedakan Primary vs Additional Port</h4><p><strong>Primary</strong> adalah port utama server (yang digunakan player untuk connect). <strong>Additional</strong> adalah port tambahan (untuk plugin query, RCON, web, dll).</p></div></div>
+  </div>
+
+  <h3 class="h3">Contoh Penggunaan Port</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Jenis Server</th><th>Port Utama</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>Minecraft Java</td><td>25565</td><td>Player connect ke <code>ip:port</code></td></tr>
+        <tr><td>Minecraft Bedrock (Geyser)</td><td>19132</td><td>Port UDP untuk Bedrock</td></tr>
+        <tr><td>Bot Discord (Node.js)</td><td>Bebas</td><td>Biasanya tidak perlu port terbuka ke publik</td></tr>
+        <tr><td>Web App / Express</td><td>3000 / 8080</td><td>Port tempat web app berjalan</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════ ACCOUNT ════════════════ -->
+<section class="page" id="p-account">
+  <h2 class="h"><i class="fa-solid fa-circle-user"></i> Akun & API Key</h2>
+  <p class="p">Pengaturan akun pribadi — ganti password, aktifkan 2FA, dan buat API key.</p>
+
+  <h2 class="h"><i class="fa-solid fa-lock"></i> Ganti Password</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Klik nama/avatar → "Account"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Scroll ke "Update Password"</h4><p>Isi password lama, password baru (min. 8 karakter), dan konfirmasi. Klik <strong>Update Password</strong>.</p></div></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-shield-halved"></i> Aktifkan 2FA</h2>
+  <p class="p">Two-Factor Authentication (2FA) menambah lapisan keamanan ekstra ke akun kamu.</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Account → "Configure 2FA"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Scan QR code dengan Google Authenticator atau Authy</h4><p>App authenticator akan generate kode 6 digit yang berubah tiap 30 detik.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Masukkan kode dari app untuk konfirmasi</h4><p>2FA aktif. Setiap login akan meminta kode dari app authenticator.</p></div></div>
+  </div>
+
+  <div class="alert ok">
+    <i class="fa-solid fa-circle-check"></i>
+    <div>Sangat disarankan aktifkan 2FA untuk keamanan server kamu. Simpan juga <strong>backup code</strong> yang diberikan saat setup — berguna kalau HP hilang.</div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-key"></i> API Key</h2>
+  <p class="p">API key digunakan jika kamu ingin mengontrol server via API (misalnya dari bot Discord atau script).</p>
+  <div class="steps">
+    <div class="step"><div class="sn">1</div><div><h4>Account → "API Credentials"</h4></div></div>
+    <div class="step"><div class="sn">2</div><div><h4>Klik "Create New"</h4><p>Beri nama key (deskripsi), isi allowed IPs (opsional, biarkan kosong untuk akses dari mana saja), lalu klik <strong>Create</strong>.</p></div></div>
+    <div class="step"><div class="sn">3</div><div><h4>Salin API key sekarang!</h4><p>Key hanya ditampilkan <strong>sekali</strong>. Jika hilang, hapus dan buat baru.</p></div></div>
+  </div>
+
+  <div class="cb">
+    <div class="ch">
+      <div class="cl"><i class="fa-solid fa-code"></i> Contoh penggunaan API key</div>
+      <button class="cp" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i> Copy</button>
+    </div>
+    <pre><code class="language-bash"># Get server status via API
+curl https://panel.domain.com/api/client \
+  -H "Authorization: Bearer ptlc_YOUR_API_KEY_HERE" \
+  -H "Accept: application/json"</code></pre>
+  </div>
+</section>
+
+<!-- ════════════════ TIPS ════════════════ -->
+<section class="page" id="p-tips">
+  <h2 class="h"><i class="fa-solid fa-lightbulb"></i> Tips & Best Practice</h2>
+  <p class="p">Panduan agar server kamu tetap stabil, aman, dan efisien.</p>
+
+  <div class="grid">
+    <div class="card"><div class="ci g"><i class="fa-solid fa-floppy-disk"></i></div><h3>Rutin Backup</h3><p>Buat backup minimal seminggu sekali, terutama sebelum update plugin atau konfigurasi besar.</p></div>
+    <div class="card"><div class="ci b"><i class="fa-solid fa-rotate-right"></i></div><h3>Restart Rutin</h3><p>Server yang jalan terus-menerus bisa bocor memori. Jadwalkan restart harian/mingguan via Schedule.</p></div>
+    <div class="card"><div class="ci y"><i class="fa-solid fa-eye"></i></div><h3>Pantau Resource</h3><p>Cek CPU dan RAM secara berkala. Kalau selalu mendekati batas, hubungi admin untuk upgrade.</p></div>
+    <div class="card"><div class="ci r"><i class="fa-solid fa-trash"></i></div><h3>Bersihkan Log</h3><p>Folder <code>logs/</code> bisa membesar seiring waktu. Hapus log lama secara berkala agar disk tidak penuh.</p></div>
+    <div class="card"><div class="ci p"><i class="fa-solid fa-lock"></i></div><h3>Jaga Password</h3><p>Jangan bagikan password akun panel ke siapapun. Gunakan fitur Sub-user jika ingin kasih akses ke orang lain.</p></div>
+    <div class="card"><div class="ci b"><i class="fa-solid fa-plug-circle-check"></i></div><h3>Test Setelah Update</h3><p>Selalu test server setelah update plugin atau konfigurasi. Jangan langsung tinggal — pantau console sebentar.</p></div>
+  </div>
+
+  <h2 class="h"><i class="fa-solid fa-ruler"></i> Estimasi Resource Umum</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Jenis Server</th><th>RAM Ideal</th><th>Disk</th></tr></thead>
+      <tbody>
+        <tr><td>Minecraft Vanilla kecil (1–5 player)</td><td>512 MB – 1 GB</td><td>2–5 GB</td></tr>
+        <tr><td>Minecraft Paper (10–20 player)</td><td>2–4 GB</td><td>5–10 GB</td></tr>
+        <tr><td>Bot Discord (Node.js sederhana)</td><td>128–256 MB</td><td>500 MB</td></tr>
+        <tr><td>Bot Python</td><td>128–512 MB</td><td>500 MB</td></tr>
+        <tr><td>Web App / API (Node/Express)</td><td>256–512 MB</td><td>1 GB</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert info">
+    <i class="fa-solid fa-circle-info"></i>
+    <div>Kalau server kamu sering out of memory atau crash karena RAM penuh, hubungi admin untuk request upgrade resource. Sertakan screenshot statistik resource sebagai bukti.</div>
+  </div>
+</section>
+
+<!-- ════════════════ FAQ ════════════════ -->
+<section class="page" id="p-faq">
+  <h2 class="h"><i class="fa-solid fa-circle-question"></i> FAQ</h2>
+
+  <div class="steps">
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Tidak bisa login ke panel?</h4>
+      <p>Pastikan email dan password benar. Coba klik "Forgot Password" untuk reset via email. Jika email tidak ditemukan, hubungi admin karena akun mungkin belum dibuat atau emailnya berbeda.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Server status "Installing" terus?</h4>
+      <p>Biasanya karena image Docker sedang diunduh pertama kali dan butuh waktu. Tunggu 5–10 menit. Kalau masih stuck, hubungi admin — mungkin ada masalah di node.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Server crash / error terus setelah start?</h4>
+      <p>Cek console untuk pesan error. Penyebab umum: RAM kurang, file konfigurasi salah, plugin konflik, atau versi Java tidak cocok. Baca error di console dan sesuaikan konfigurasi.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Tidak bisa upload file karena ukurannya terlalu besar?</h4>
+      <p>Panel ada batas ukuran upload. Untuk file besar (plugin, world, dll), gunakan <strong>SFTP</strong> dengan FileZilla atau WinSCP — tidak ada batas ukuran file.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Minta tambah RAM / CPU / Disk?</h4>
+      <p>Hubungi admin via WhatsApp. Sertakan nama server dan alasan kenapa butuh upgrade resource. Admin akan melakukan upgrade dari sisi panel.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Player tidak bisa connect ke server Minecraft?</h4>
+      <p>Pastikan server sudah Online (bukan Offline/Crashed). Cek port yang digunakan di tab Network dan pastikan player pakai format <code>IP:PORT</code> yang benar. Kalau port 25565, port bisa dikosongkan.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Lupa password akun panel?</h4>
+      <p>Gunakan fitur "Forgot Password" di halaman login dan masukkan email akunmu. Jika email tidak valid atau tidak menerima email reset, hubungi admin untuk reset manual.</p>
+    </div></div>
+    <div class="step"><div class="sn"><i class="fa-solid fa-question"></i></div><div>
+      <h4>Backup gagal terus?</h4>
+      <p>Kemungkinan slot backup sudah penuh. Hapus backup lama terlebih dahulu, lalu coba buat backup baru. Jika masih gagal, hubungi admin — mungkin ada masalah di storage node.</p>
+    </div></div>
+  </div>
+
+  <div class="div"></div>
+  <div class="alert ok">
+    <i class="fa-brands fa-whatsapp"></i>
+    <div>Masalah yang tidak ada di FAQ ini? Langsung hubungi admin via WhatsApp. Sertakan <strong>nama server</strong> dan <strong>screenshot error</strong> supaya lebih cepat ditangani!</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+  });
+
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+    document.getElementById('p-' + id)?.classList.add('on');
+    document.querySelectorAll('.s-link').forEach(l => l.classList.remove('on'));
+    if (el) el.classList.add('on');
+    if (window.innerWidth <= 860) toggleSide();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleSide() {
+    document.getElementById('side').classList.toggle('open');
+    document.getElementById('ov').classList.toggle('show');
+  }
+
+  function copyCode(btn) {
+    const code = btn.closest('.cb').querySelector('code').innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      btn.classList.add('ok2');
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-copy"></i> Copy';
+        btn.classList.remove('ok2');
+      }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

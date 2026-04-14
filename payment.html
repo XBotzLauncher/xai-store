@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XAiHost — Pembayaran QRIS</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/svg+xml" href="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --bg:          #f0f2f5;
+      --surface:     #ffffff;
+      --surface2:    #f7f8fa;
+      --border:      #e4e7ec;
+      --border2:     #d0d5dd;
+      --text:        #101828;
+      --text2:       #475467;
+      --text3:       #98a2b3;
+      --blue:        #1d6ae5;
+      --blue-light:  #eff4ff;
+      --blue-mid:    #b2ccff;
+      --green:       #12b76a;
+      --green-light: #d1fadf;
+      --yellow:      #f79009;
+      --yellow-light:#fef0c7;
+      --red:         #f04438;
+      --red-light:   #fee4e2;
+      --purple:      #6941c6;
+      --ff: 'Plus Jakarta Sans', sans-serif;
+      --fm: 'JetBrains Mono', monospace;
+      --sh3: 0 8px 32px rgba(16,24,40,.12);
+      --nav: 64px;
+    }
+
+    body {
+      font-family: var(--ff);
+      background: var(--bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    nav {
+      height: var(--nav);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .n-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 1.1rem; color: var(--text);
+      text-decoration: none; letter-spacing: -.02em;
+    }
+    .n-logo-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .n-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .n-back {
+      display: flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: 7px; font-size: .82rem; font-weight: 600;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text2); text-decoration: none; transition: .15s;
+    }
+    .n-back:hover { border-color: var(--border2); color: var(--text); }
+
+    /* ── MAIN LAYOUT ── */
+    .page-wrap {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px 60px;
+      gap: 24px;
+    }
+
+    /* ── VIEW SYSTEM ── */
+    .view { display: none; width: 100%; max-width: 420px; }
+    .view.active { display: block; }
+
+    /* ── LOADING VIEW ── */
+    .loading-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 48px 24px;
+      text-align: center;
+      box-shadow: var(--sh3);
+    }
+    .loading-spinner {
+      width: 48px; height: 48px;
+      border: 4px solid var(--border);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    .loading-card p { color: var(--text2); font-size: .9rem; }
+
+    /* ── ERROR VIEW ── */
+    .error-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 40px 24px;
+      text-align: center;
+      box-shadow: var(--sh3);
+    }
+    .error-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .error-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .error-card p { color: var(--text2); font-size: .88rem; margin-bottom: 24px; }
+    .back-store-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: 8px;
+      background: var(--blue); color: #fff;
+      font-size: .85rem; font-weight: 700;
+      border: none; cursor: pointer; text-decoration: none;
+    }
+    .back-store-btn:hover { background: #1559c7; }
+
+    /* ── PAYMENT VIEW ── */
+    .pay-card {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--sh3);
+      overflow: hidden;
+    }
+    .pay-header {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      padding: 28px 24px 20px;
+      color: #fff;
+      text-align: center;
+    }
+    .pay-header h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+    .pay-header p  { font-size: .8rem; opacity: .85; }
+    .pay-amount { font-size: 2.2rem; font-weight: 800; margin: 8px 0 2px; }
+    .pay-body { padding: 24px; }
+    .qr-wrap {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px; margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qr-wrap img { max-width: 200px; border-radius: 4px; }
+    .pay-info { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .pay-info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .8rem;
+    }
+    .pay-info-row span:first-child { color: var(--text2); }
+    .pay-info-row span:last-child  { font-weight: 700; font-family: var(--fm); }
+    .pay-expired {
+      background: var(--yellow-light); border: 1px solid #fec84b;
+      border-radius: 7px; padding: 9px 14px; font-size: .78rem; color: #7a2e0e;
+      margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .pay-check-btn {
+      width: 100%; padding: 11px; border-radius: 8px;
+      background: var(--green); color: #fff;
+      font-size: .85rem; font-weight: 700;
+      border: none; cursor: pointer; transition: .15s; margin-bottom: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+    }
+    .pay-check-btn:hover:not(:disabled) { background: #0da05d; }
+    .pay-check-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .pay-cancel-btn {
+      width: 100%; padding: 9px; border-radius: 8px;
+      background: none; color: var(--text3);
+      font-size: .8rem; font-weight: 600;
+      border: 1px solid var(--border); cursor: pointer; transition: .15s;
+      text-decoration: none; display: flex; align-items: center; justify-content: center;
+    }
+    .pay-cancel-btn:hover { color: var(--text); border-color: var(--border2); }
+
+    /* ── EXPIRED NOTICE ── */
+    .expired-notice {
+      background: var(--red-light); border: 1px solid #fda29b;
+      border-radius: 8px; padding: 14px 16px; margin-bottom: 16px;
+      font-size: .83rem; color: var(--red); display: flex; gap: 9px;
+    }
+
+    /* ── SUCCESS VIEW ── */
+    .success-card {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: var(--sh3);
+      overflow: hidden;
+    }
+    .success-header {
+      background: linear-gradient(135deg, var(--green), #059669);
+      padding: 28px 24px;
+      color: #fff; text-align: center;
+    }
+    .success-icon { font-size: 3rem; margin-bottom: 10px; }
+    .success-header h3 { font-size: 1.3rem; font-weight: 800; }
+    .success-header p { font-size: .82rem; opacity: .9; margin-top: 4px; }
+    .success-body { padding: 24px; }
+    .cred-box {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden; margin-bottom: 16px;
+    }
+    .cred-head {
+      background: var(--text); color: #fff;
+      padding: 9px 14px; font-size: .73rem; font-weight: 700;
+      display: flex; align-items: center; gap: 7px; letter-spacing: .05em;
+    }
+    .cred-rows { display: flex; flex-direction: column; }
+    .cred-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 11px 14px; border-bottom: 1px solid var(--border);
+      font-size: .82rem;
+    }
+    .cred-row:last-child { border-bottom: none; }
+    .cred-row span:first-child { color: var(--text2); font-weight: 500; flex-shrink: 0; }
+    .cred-row .cred-val {
+      font-family: var(--fm); font-size: .78rem;
+      color: var(--text); font-weight: 700;
+      display: flex; align-items: center; gap: 6px;
+      text-align: right; word-break: break-all;
+    }
+    .copy-tiny {
+      background: none; border: 1px solid var(--border); border-radius: 4px;
+      padding: 1px 6px; font-size: .65rem; font-weight: 700; cursor: pointer;
+      color: var(--text3); transition: .12s; flex-shrink: 0;
+    }
+    .copy-tiny:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .success-alert {
+      background: var(--yellow-light); border: 1px solid #fec84b;
+      border-radius: 8px; padding: 12px 14px;
+      font-size: .8rem; color: #7a2e0e; margin-bottom: 16px;
+      display: flex; gap: 9px;
+    }
+    .done-btn {
+      width: 100%; padding: 11px; border-radius: 8px;
+      background: var(--blue); color: #fff;
+      font-size: .85rem; font-weight: 700;
+      border: none; cursor: pointer; transition: .15s;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      text-decoration: none;
+    }
+    .done-btn:hover { background: #1559c7; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: #fff;
+      padding: 12px 20px; border-radius: 10px;
+      font-size: .83rem; font-weight: 600;
+      box-shadow: var(--sh3); z-index: 1000;
+      display: flex; align-items: center; gap: 8px;
+      opacity: 0; transition: opacity .3s;
+      pointer-events: none; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+    .toast.ok  { background: var(--green); }
+    .toast.err { background: var(--red); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    footer {
+      background: var(--text); color: rgba(255,255,255,.6);
+      text-align: center; padding: 24px;
+      font-size: .8rem;
+    }
+    footer strong { color: #fff; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="n-logo" href="/">
+    <span class="n-logo-icon"><img src="https://tourl.xbotzlauncher.site/files/1776071460454-367580.jpeg" alt="Logo"></span>
+    XAiHost
+  </a>
+  <a class="n-back" href="/"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- VIEW: LOADING -->
+  <div class="view active" id="view-loading">
+    <div class="loading-card">
+      <div class="loading-spinner"></div>
+      <p>Memuat data pembayaran...</p>
+    </div>
+  </div>
+
+  <!-- VIEW: ERROR -->
+  <div class="view" id="view-error">
+    <div class="error-card">
+      <div class="error-icon">😕</div>
+      <h3 id="err-title">Transaksi Tidak Ditemukan</h3>
+      <p id="err-msg">Link pembayaran tidak valid atau sudah kedaluwarsa. Silakan buat order baru.</p>
+      <a href="/" class="back-store-btn"><i class="fa-solid fa-arrow-left"></i> Kembali ke Store</a>
+    </div>
+  </div>
+
+  <!-- VIEW: PAYMENT -->
+  <div class="view" id="view-payment">
+    <div class="pay-card">
+      <div class="pay-header">
+        <h3>Scan QRIS untuk Bayar</h3>
+        <p>GoPay · OVO · Dana · Shopee Pay · m-Banking</p>
+        <div class="pay-amount" id="pay-amount">Rp0</div>
+      </div>
+      <div class="pay-body">
+        <div class="qr-wrap">
+          <img id="qr-img" src="" alt="QRIS QR Code"/>
+        </div>
+        <div class="pay-info">
+          <div class="pay-info-row"><span>Paket</span><span id="pay-plan">—</span></div>
+          <div class="pay-info-row"><span>ID Transaksi</span><span id="pay-txid">—</span></div>
+          <div class="pay-info-row"><span>Expired</span><span id="pay-exp">—</span></div>
+        </div>
+        <div id="pay-expired-notice" class="pay-expired" style="display:none">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>QR ini mungkin sudah kedaluwarsa. Cek pembayaran tetap bisa dicoba jika kamu sudah bayar.</span>
+        </div>
+        <div class="pay-expired" id="pay-hint" style="display:flex">
+          <i class="fa-solid fa-clock"></i>
+          QR berlaku <strong>&nbsp;10 menit</strong>. Setelah bayar klik "Cek Pembayaran".
+        </div>
+        <button class="pay-check-btn" id="check-btn" onclick="checkPayment()">
+          <i class="fa-solid fa-circle-check"></i> Cek Pembayaran
+        </button>
+        <a href="/" class="pay-cancel-btn">
+          <i class="fa-solid fa-xmark"></i>&nbsp; Batalkan Order
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: SUCCESS -->
+  <div class="view" id="view-success">
+    <div class="success-card">
+      <div class="success-header">
+        <div class="success-icon">🎉</div>
+        <h3>Pembayaran Berhasil!</h3>
+        <p>Server kamu sudah dibuat otomatis</p>
+      </div>
+      <div class="success-body">
+        <div class="success-alert">
+          <i class="fa-solid fa-triangle-exclamation" style="flex-shrink:0;margin-top:2px;"></i>
+          <span>Simpan kredensial ini sekarang! Screenshot atau catat — tidak akan ditampilkan lagi.</span>
+        </div>
+        <div class="cred-box">
+          <div class="cred-head"><i class="fa-solid fa-server"></i> INFORMASI SERVER</div>
+          <div class="cred-rows">
+            <div class="cred-row"><span>Panel URL</span><div class="cred-val" id="cr-panel">—<button class="copy-tiny" onclick="copyVal('cr-panel')">copy</button></div></div>
+            <div class="cred-row"><span>Email Login</span><div class="cred-val" id="cr-email">—<button class="copy-tiny" onclick="copyVal('cr-email')">copy</button></div></div>
+            <div class="cred-row"><span>Password</span><div class="cred-val" id="cr-pass">—<button class="copy-tiny" onclick="copyVal('cr-pass')">copy</button></div></div>
+            <div class="cred-row"><span>Nama Server</span><div class="cred-val" id="cr-sname">—</div></div>
+            <div class="cred-row"><span>Server IP:Port</span><div class="cred-val" id="cr-addr">—<button class="copy-tiny" onclick="copyVal('cr-addr')">copy</button></div></div>
+          </div>
+        </div>
+        <div class="cred-box">
+          <div class="cred-head"><i class="fa-solid fa-receipt"></i> DETAIL TRANSAKSI</div>
+          <div class="cred-rows">
+            <div class="cred-row"><span>Paket</span><div class="cred-val" id="cr-plan">—</div></div>
+            <div class="cred-row"><span>Harga</span><div class="cred-val" id="cr-amount">—</div></div>
+            <div class="cred-row"><span>Waktu</span><div class="cred-val" id="cr-time">—</div></div>
+          </div>
+        </div>
+        <a href="/" class="done-btn">
+          <i class="fa-solid fa-check"></i> Selesai — Ke Panel
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2025 <strong>XAiHost</strong> · Powered by XBotz
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── STATE ──
+  const params     = new URLSearchParams(location.search);
+  const txId       = params.get('id');
+  const qrImg      = params.get('qr');
+  const amount     = params.get('amount');
+  const expiredAt  = params.get('exp');
+  const planName   = params.get('plan');
+
+  // Also persist to sessionStorage so refresh keeps data
+  function saveSession(data) {
+    try { sessionStorage.setItem('xaihost_pay', JSON.stringify(data)); } catch(_) {}
+  }
+  function loadSession() {
+    try { return JSON.parse(sessionStorage.getItem('xaihost_pay') || 'null'); } catch(_) { return null; }
+  }
+
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // ── INIT ──
+  (function init() {
+    // Priority: URL params → sessionStorage → error
+    let data = null;
+
+    if (txId) {
+      // Restore from sessionStorage (saved by index.html submitOrder)
+      const sess = loadSession();
+      if (sess && sess.id === txId) {
+        data = {
+          txId:      sess.id,
+          qrImg:     sess.qr_image,
+          amount:    sess.amount,
+          expiredAt: sess.expired_at,
+          planName:  sess.planName,
+        };
+      }
+    }
+
+    if (!data) {
+      showError('Sesi Tidak Ditemukan', 'Data pembayaran tidak ada atau sudah expired. Silakan buat order baru dari halaman store.');
+      return;
+    }
+
+    populatePayment(data);
+  })();
+
+  function populatePayment(data) {
+    document.getElementById('qr-img').src            = data.qrImg;
+    document.getElementById('pay-amount').textContent = 'Rp' + parseInt(data.amount).toLocaleString('id');
+    document.getElementById('pay-txid').textContent   = data.txId;
+    document.getElementById('pay-exp').textContent    = data.expiredAt || '—';
+    document.getElementById('pay-plan').textContent   = data.planName || '—';
+
+    // Parse format DD/MM/YYYY HH:mm dari qris.pw
+    if (data.expiredAt) {
+      try {
+        const parts = data.expiredAt.match(/^(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})$/);
+        if (parts) {
+          // parts: [full, dd, mm, yyyy, HH, mm]
+          const exp = new Date(+parts[3], +parts[2]-1, +parts[1], +parts[4], +parts[5]);
+          if (!isNaN(exp) && exp < new Date()) {
+            document.getElementById('pay-hint').style.display = 'none';
+            document.getElementById('pay-expired-notice').style.display = 'flex';
+          }
+        }
+      } catch(_) {}
+    }
+
+    showView('view-payment');
+  }
+
+  function showError(title, msg) {
+    document.getElementById('err-title').textContent = title;
+    document.getElementById('err-msg').textContent   = msg;
+    showView('view-error');
+  }
+
+  // ── CHECK PAYMENT ──
+  async function checkPayment() {
+    const sess = loadSession();
+    const id   = (sess && sess.txId) || txId;
+    if (!id) return;
+
+    const btn = document.getElementById('check-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch" style="animation:spin .7s linear infinite"></i> Mengecek...';
+
+    try {
+      const res  = await fetch('/api/check-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      });
+      const data = await res.json();
+
+      if (data.status === true && data.server) {
+        const s = data.server;
+        // Populate success
+        document.getElementById('cr-panel').childNodes[0].textContent  = s.panelUrl;
+        document.getElementById('cr-email').childNodes[0].textContent  = s.email;
+        document.getElementById('cr-pass').childNodes[0].textContent   = s.password;
+        document.getElementById('cr-sname').textContent                = s.serverName;
+        document.getElementById('cr-addr').childNodes[0].textContent   = s.address || '(lihat di panel)';
+        document.getElementById('cr-plan').textContent                 = s.plan;
+        document.getElementById('cr-amount').textContent               = 'Rp' + s.amount.toLocaleString('id');
+        document.getElementById('cr-time').textContent                 = data.date + ' ' + data.time;
+        // Clear session — order done
+        try { sessionStorage.removeItem('xaihost_pay'); } catch(_) {}
+        showView('view-success');
+      } else if (data.payment_status === 'pending') {
+        showToast('Pembayaran belum terdeteksi, coba lagi sebentar', '');
+      } else {
+        showToast(data.message || 'Gagal cek pembayaran', 'err');
+      }
+    } catch(e) {
+      showToast('Gagal terhubung ke server', 'err');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Cek Pembayaran';
+    }
+  }
+
+  function copyVal(id) {
+    const el   = document.getElementById(id);
+    const text = el.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(text).then(() => showToast('Disalin!', 'ok'));
+  }
+
+  let toastTimer;
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className   = 'toast show' + (type ? ' ' + type : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>
